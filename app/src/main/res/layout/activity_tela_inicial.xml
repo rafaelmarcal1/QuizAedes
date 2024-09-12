@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".view.TelaInicial">
+
+    <!-- Botão para iniciar o jogo -->
+    <Button
+        android:id="@+id/btnIniciarJogo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/iniciar_quiz"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="32dp" />
+
+    <!-- Botão para ver conquistas -->
+    <Button
+        android:id="@+id/btnConquistas"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/ver_conquistas"
+        app:layout_constraintTop_toBottomOf="@id/btnIniciarJogo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp" />
+
+    <!-- Botão para acessar ranking -->
+    <Button
+        android:id="@+id/btnRanking"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/ranking"
+        app:layout_constraintTop_toBottomOf="@id/btnConquistas"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp" />
+
+    <!-- Botão para ver perfil do usuário -->
+    <Button
+        android:id="@+id/btnPerfil"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/perfil_do_usu_rio"
+        app:layout_constraintTop_toBottomOf="@id/btnRanking"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp" />
+
+    <!-- Botão para configurações -->
+    <Button
+        android:id="@+id/btnConfiguracoes"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/configura_es"
+        app:layout_constraintTop_toBottomOf="@id/btnPerfil"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

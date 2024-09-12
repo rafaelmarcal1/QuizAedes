@@ -1,3 +1,25 @@
 <resources>
     <string name="app_name">QuizAedes</string>
+    <string name="login">Login</string>
+    <string name="cadastro">Cadastro</string>
+    <string name="retornar_ao_quiz">Retornar ao Quiz</string>
+    <string name="logo_do_aplicativo">Logo do Aplicativo</string>
+    <string name="e_mail">E-mail</string>
+    <string name="senha">Senha</string>
+    <string name="login_2">Login</string>
+    <string name="esqueci_minha_senha">Esqueci minha senha</string>
+    <string name="cadastrar">Cadastrar</string>
+    <string name="nomeCadastro">Nome</string>
+    <string name="e_mailCadastro">E-mail</string>
+    <string name="senhaCadastro">Senha</string>
+    <string name="confirme_a_senhaCadastro">Confirme a Senha</string>
+    <string name="finalizar_cadastro">Finalizar Cadastro</string>
+    <string name="j_tem_uma_conta_fa_a_login">Já tem uma conta? Faça login</string>
+    <string name="iniciar_quiz">Iniciar Quiz</string>
+    <string name="ver_conquistas">Ver Conquistas</string>
+    <string name="ranking">Ranking</string>
+    <string name="perfil_do_usu_rio">Perfil do Usuário</string>
+    <string name="configura_es">Configurações</string>
+    <string name="nome_do_usu_rio">Nome do Usuário</string>
+    <string name="editar_perfil">Editar Perfil</string>
 </resources>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.TelaDePerguntas">
+
+    <!-- Pergunta -->
+    <TextView
+        android:id="@+id/tvPergunta"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Aqui vai a pergunta..."
+        android:textSize="18sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="32dp" />
+
+    <!-- Opções de resposta -->
+    <RadioGroup
+        android:id="@+id/rgOpcoes"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tvPergunta"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp">
+
+        <RadioButton
+            android:id="@+id/rbOpcaoA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Opção A" />
+
+        <RadioButton
+            android:id="@+id/rbOpcaoB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Opção B" />
+
+        <RadioButton
+            android:id="@+id/rbOpcaoC"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Opção C" />
+
+        <RadioButton
+            android:id="@+id/rbOpcaoD"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Opção D" />
+    </RadioGroup>
+
+    <!-- Botão para confirmar resposta -->
+    <Button
+        android:id="@+id/btnConfirmarResposta"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Confirmar Resposta"
+        app:layout_constraintTop_toBottomOf="@id/rgOpcoes"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp" />
+
+    <!-- Feedback de resposta -->
+    <TextView
+        android:id="@+id/tvFeedback"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Aqui o feedback da resposta"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/btnConfirmarResposta"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp" />
+
+    <!-- Barra de progresso -->
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:progress="50"
+        app:layout_constraintTop_toBottomOf="@id/tvFeedback"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
