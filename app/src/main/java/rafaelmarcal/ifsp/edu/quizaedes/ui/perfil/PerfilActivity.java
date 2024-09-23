@@ -1,4 +1,4 @@
-package rafaelmarcal.ifsp.edu.quizaedes.view;
+package rafaelmarcal.ifsp.edu.quizaedes.ui.perfil;
 
 import android.os.Bundle;
 
@@ -10,13 +10,13 @@ import androidx.core.view.WindowInsetsCompat;
 
 import rafaelmarcal.ifsp.edu.quizaedes.R;
 
-public class TelaDeConquistas extends AppCompatActivity {
+public class PerfilActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_tela_de_conquistas);
+        setContentView(R.layout.activity_perfil);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);

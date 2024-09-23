@@ -1,4 +1,4 @@
-package rafaelmarcal.ifsp.edu.quizaedes.view;
+package rafaelmarcal.ifsp.edu.quizaedes.ui.main;
 
 import android.os.Bundle;
 

@@ -22,4 +22,8 @@
     <string name="configura_es">Configurações</string>
     <string name="nome_do_usu_rio">Nome do Usuário</string>
     <string name="editar_perfil">Editar Perfil</string>
+    <string name="alterar_senha">Alterar Senha</string>
+    <string name="notifica_btn">Notificações</string>
+    <string name="privacidade_botaoconfiguracoes">Privacidade</string>
+    <string name="sair_btn_config">Sair</string>
 </resources>

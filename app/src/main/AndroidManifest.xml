@@ -13,31 +13,31 @@
         android:theme="@style/Theme.QuizAedes"
         tools:targetApi="31">
         <activity
-            android:name=".view.TelaDeConfiguracoes"
+            android:name=".ui.configuracoes.ConfiguracoesActivity"
             android:exported="false" />
         <activity
-            android:name=".view.TelaDePerfil"
+            android:name=".ui.perfil.PerfilActivity"
             android:exported="false" />
         <activity
-            android:name=".view.TelaDeRanking"
+            android:name=".ui.ranking.RankingActivity"
             android:exported="false" />
         <activity
-            android:name=".view.TelaDeConquistas"
+            android:name=".ui.conquistas.ConquistasActivity"
             android:exported="false" />
         <activity
-            android:name=".view.TelaDePerguntas"
+            android:name=".ui.perguntas.PerguntasActivity"
             android:exported="false" />
         <activity
-            android:name=".view.TelaInicial"
+            android:name=".ui.inicio.InicioActivity"
             android:exported="false" />
         <activity
-            android:name=".view.TelaDeCadastro"
+            android:name=".ui.cadastro.CadastroActivity"
             android:exported="false" />
         <activity
-            android:name=".view.TelaDeLogin"
+            android:name=".ui.login.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".view.MainActivity"
+            android:name=".ui.main.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

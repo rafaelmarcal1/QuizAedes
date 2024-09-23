@@ -5,60 +5,48 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    tools:context=".view.TelaInicial">
+    tools:context=".ui.configuracoes.ConfiguracoesActivity">
 
-    <!-- Botão para iniciar o jogo -->
+    <!-- Alterar senha -->
     <Button
-        android:id="@+id/btnIniciarJogo"
+        android:id="@+id/btnAlterarSenha"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/iniciar_quiz"
+        android:text="@string/alterar_senha"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="32dp" />
 
-    <!-- Botão para ver conquistas -->
+    <!-- Notificações -->
     <Button
-        android:id="@+id/btnConquistas"
+        android:id="@+id/btnNotificacoes"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/ver_conquistas"
-        app:layout_constraintTop_toBottomOf="@id/btnIniciarJogo"
+        android:text="@string/notifica_btn"
+        app:layout_constraintTop_toBottomOf="@id/btnAlterarSenha"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp" />
 
-    <!-- Botão para acessar ranking -->
+    <!-- Preferências de privacidade -->
     <Button
-        android:id="@+id/btnRanking"
+        android:id="@+id/btnPrivacidade"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/ranking"
-        app:layout_constraintTop_toBottomOf="@id/btnConquistas"
+        android:text="@string/privacidade_botaoconfiguracoes"
+        app:layout_constraintTop_toBottomOf="@id/btnNotificacoes"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp" />
 
-    <!-- Botão para ver perfil do usuário -->
+    <!-- Sair da conta -->
     <Button
-        android:id="@+id/btnPerfil"
+        android:id="@+id/btnSairConta"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/perfil_do_usu_rio"
-        app:layout_constraintTop_toBottomOf="@id/btnRanking"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp" />
-
-    <!-- Botão para configurações -->
-    <Button
-        android:id="@+id/btnConfiguracoes"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/configura_es"
-        app:layout_constraintTop_toBottomOf="@id/btnPerfil"
+        android:text="@string/sair_btn_config"
+        app:layout_constraintTop_toBottomOf="@id/btnPrivacidade"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp" />
