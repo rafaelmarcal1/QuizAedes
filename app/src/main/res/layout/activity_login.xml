@@ -41,7 +41,7 @@
 
     <!--Botão para Login -->
     <Button
-        android:id="@+id/btnLogin"
+        android:id="@+id/btnFazerLogin"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/login_2"
@@ -67,7 +67,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnLogin"
+        app:layout_constraintTop_toBottomOf="@id/btnFazerLogin"
         android:padding="12dp"/>
 
     <Button
