@@ -7,11 +7,10 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import rafaelmarcal.ifsp.edu.quizaedes.databinding.ActivityLoginBinding;
-import rafaelmarcal.ifsp.edu.quizaedes.viewmodel.LoginViewModel;
 
 public class LoginActivity extends AppCompatActivity {
     private ActivityLoginBinding binding;
-    private LoginViewModel loginViewModel;
+    private LoginViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +21,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         // Inicializando o ViewModel
-        loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
+        viewModel = new ViewModelProvider(this).get(LoginViewModel.class);
 
         // Configurando o clique do botão de login
         binding.btnFazerLogin.setOnClickListener(view -> {
@@ -30,7 +29,7 @@ public class LoginActivity extends AppCompatActivity {
             String senha = binding.etPassword.getText().toString().trim();
 
             if (!email.isEmpty() && !senha.isEmpty()) {
-                loginViewModel.fazerLogin(email, senha);
+                viewModel.fazerLogin(email, senha);
             } else {
                 Toast.makeText(this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
             }
@@ -41,7 +40,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void observarViewModel() {
         // Observa o sucesso do login
-        loginViewModel.getLoginResultado().observe(this, new Observer<Boolean>() {
+        viewModel.getLoginResultado().observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean sucesso) {
                 if (sucesso) {
@@ -54,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         // Observa os erros
-        loginViewModel.getErro().observe(this, new Observer<String>() {
+        viewModel.getErro().observe(this, new Observer<String>() {
             @Override
             public void onChanged(String mensagemErro) {
                 if (mensagemErro != null) {

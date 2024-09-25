@@ -7,11 +7,10 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import rafaelmarcal.ifsp.edu.quizaedes.databinding.ActivityCadastroBinding;
-import rafaelmarcal.ifsp.edu.quizaedes.viewmodel.CadastroViewModel;
 
 public class CadastroActivity extends AppCompatActivity {
     private ActivityCadastroBinding binding;
-    private CadastroViewModel cadastroViewModel;
+    private CadastroViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +21,7 @@ public class CadastroActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         // Inicializando o ViewModel
-        cadastroViewModel = new ViewModelProvider(this).get(CadastroViewModel.class);
+        viewModel = new ViewModelProvider(this).get(CadastroViewModel.class);
 
         // Configurando o clique do botão de criação de conta
         binding.btnCriarConta.setOnClickListener(view -> {
@@ -30,7 +29,7 @@ public class CadastroActivity extends AppCompatActivity {
             String senha = binding.etPassword.getText().toString().trim();
 
             if (!email.isEmpty() && !senha.isEmpty()) {
-                cadastroViewModel.criarConta(email, senha);
+                viewModel.criarConta(email, senha);
             } else {
                 Toast.makeText(this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
             }
@@ -41,7 +40,7 @@ public class CadastroActivity extends AppCompatActivity {
 
     private void observarViewModel() {
         // Observa o sucesso do registro
-        cadastroViewModel.getRegistroResultado().observe(this, new Observer<Boolean>() {
+        viewModel.getRegistroResultado().observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean sucesso) {
                 if (sucesso) {
@@ -54,7 +53,7 @@ public class CadastroActivity extends AppCompatActivity {
         });
 
         // Observa os erros
-        cadastroViewModel.getErro().observe(this, new Observer<String>() {
+        viewModel.getErro().observe(this, new Observer<String>() {
             @Override
             public void onChanged(String mensagemErro) {
                 if (mensagemErro != null) {
@@ -62,5 +61,14 @@ public class CadastroActivity extends AppCompatActivity {
                 }
             }
         });
+
+        // Usando expressão lambda
+        /*
+        viewModel.getErro().observe(this, mensagemErro -> {
+            if (mensagemErro != null) {
+                Toast.makeText(CadastroActivity.this, mensagemErro, Toast.LENGTH_SHORT).show();
+            }
+        });
+         */
     }
 }

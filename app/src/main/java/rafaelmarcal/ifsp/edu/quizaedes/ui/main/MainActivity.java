@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import rafaelmarcal.ifsp.edu.quizaedes.R;
 import rafaelmarcal.ifsp.edu.quizaedes.databinding.ActivityMainBinding;
+import rafaelmarcal.ifsp.edu.quizaedes.ui.login.LoginActivity;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -17,20 +18,19 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
         // Usando ViewBinding para substituir o findViewById
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        setupClickListener();
+    }
+
+    private void setupClickListener() {
         // Botão de Login
-        binding.btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Navegar para a LoginActivity
-                Intent intent = new Intent(MainActivity.this, rafaelmarcal.ifsp.edu.quizaedes.ui.login.LoginActivity.class);
-                startActivity(intent);
-            }
+        binding.btnLogin.setOnClickListener(view -> {
+            //Navegar para a LoginActivity
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(intent);
         });
 
         // Botão de Cadastro
