@@ -8,35 +8,71 @@
     tools:context=".ui.cadastro.CadastroActivity"
     android:padding="16dp">
 
+    <!-- Guidelines para espaçamento entre elementos -->
+    <!-- Guideline para posicionar o nome -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineNome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="121dp" />
 
-    <!-- Campo de Nome -->
+    <!-- Guideline para posicionar o e-mail -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.30" />
+
+    <!-- Guideline para posicionar a senha -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineSenha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.45" />
+
+    <!-- Guideline para confirmar senha -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineConfirmSenha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.60" />
+
+    <!-- Guideline para o botão -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.75" />
+
+    <!-- Campo de Nome (usando guideline para posição) -->
     <EditText
         android:id="@+id/etNome"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/nomeCadastro"
         android:inputType="textPersonName"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guidelineNome"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="@+id/etEmail"
-        android:layout_marginBottom="16dp"
-        android:layout_marginTop="32dp"
-        android:padding="12dp"/>
+        android:layout_marginTop="8dp"
+        android:padding="12dp" />
 
-
-    <!--Campo de E-mail-->
+    <!-- Campo de E-mail -->
     <EditText
         android:id="@+id/etEmail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/e_mailCadastro"
         android:inputType="textEmailAddress"
-        app:layout_constraintTop_toBottomOf="@+id/etNome"
+        app:layout_constraintTop_toBottomOf="@id/guidelineEmail"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="@+id/etPassword"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="8dp"
         android:padding="12dp"/>
 
     <!-- Campo de Senha -->
@@ -46,11 +82,10 @@
         android:layout_height="wrap_content"
         android:hint="@string/senhaCadastro"
         android:inputType="textPassword"
-        app:layout_constraintTop_toBottomOf="@id/etEmail"
+        app:layout_constraintTop_toBottomOf="@id/guidelineSenha"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/etConfirmPassword"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="8dp"
         android:padding="12dp" />
 
     <!-- Campo de Confirmação de Senha -->
@@ -60,11 +95,10 @@
         android:layout_height="wrap_content"
         android:hint="@string/confirme_a_senhaCadastro"
         android:inputType="textPassword"
-        app:layout_constraintTop_toBottomOf="@id/etPassword"
+        app:layout_constraintTop_toBottomOf="@id/guidelineConfirmSenha"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/btnCadastro"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="8dp"
         android:padding="12dp" />
 
     <!-- Botão para Finalizar Cadastro -->
@@ -73,11 +107,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/finalizar_cadastro"
-        app:layout_constraintTop_toBottomOf="@id/etConfirmPassword"
+        app:layout_constraintTop_toBottomOf="@id/guidelineButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/linkVoltarLogin"
-        android:layout_marginBottom="16dp"
         android:layout_marginTop="24dp" />
 
     <!-- Link para Voltar ao Login -->
@@ -92,20 +124,7 @@
         app:layout_constraintTop_toBottomOf="@id/btnCriarConta"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginTop="16dp"
         android:gravity="center" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-
-
-
-
-
-
-
-
-
