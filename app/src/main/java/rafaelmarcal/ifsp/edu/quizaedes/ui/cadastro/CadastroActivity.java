@@ -25,17 +25,22 @@ public class CadastroActivity extends AppCompatActivity {
 
         // Configurando o clique do botão de criação de conta
         binding.btnCriarConta.setOnClickListener(view -> {
-            String email = binding.etEmail.getText().toString().trim();
-            String senha = binding.etPassword.getText().toString().trim();
-
-            if (!email.isEmpty() && !senha.isEmpty()) {
-                viewModel.criarConta(email, senha);
-            } else {
-                Toast.makeText(this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
-            }
+            handleCriarConta();
         });
 
         observarViewModel();
+    }
+
+    private void handleCriarConta() {
+        String nome = binding.etNome.getText().toString().trim();
+        String email = binding.etEmail.getText().toString().trim();
+        String senha = binding.etPassword.getText().toString().trim();
+
+        if (!nome.isEmpty() && !email.isEmpty() && !senha.isEmpty()) {
+            viewModel.criarConta(nome, email, senha);
+        } else {
+            Toast.makeText(this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void observarViewModel() {

@@ -1,28 +1,29 @@
 package rafaelmarcal.ifsp.edu.quizaedes.data.model;
 
 public class User {
-    private String userId;
+    private String username;
     private String email;
     private String password;
 
     //Construtor vazio requirido para Firebase
-    public User(){
+    public User() {
 
     }
 
-    public User(String userId, String email, String password){
-        this.userId = userId;
+    public User(String username, String email, String password) {
+        this.username = username;
         this.email = email;
         this.password = password; // Considere usar Hash em vez de texto simples
     }
 
     //Getters e Setters
-    public String getUserId() {
-        return userId;
+
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getEmail() {
