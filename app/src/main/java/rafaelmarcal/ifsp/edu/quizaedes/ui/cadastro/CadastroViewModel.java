@@ -7,11 +7,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.Firebase;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.FirestoreKt;
-import com.google.firebase.firestore.core.FirestoreClient;
-import com.google.firebase.firestore.remote.FirestoreChannel;
+
 
 import rafaelmarcal.ifsp.edu.quizaedes.data.repository.UserRepository;
 
@@ -34,23 +30,17 @@ public class CadastroViewModel extends ViewModel {
         return erro;
     }
 
-    public void criarConta(String nome, String email, String senha){
-//        auth.createUserWithEmailAndPassword(email, senha).addOnCompleteListener(task -> {
-//            if (task.isSuccessful()){
-//                registroResultado.setValue(true);
-//            } else {
-//                registroResultado.setValue(false);
-//                erro.setValue(task.getException() != null ? task.getException().getMessage() : "Erro!");
-//            }
-//        });
-
+    public void criarConta(String nome, String email, String senha) {
+//
         repository.addUser(nome, email, senha, new OnCompleteListener() {
             @Override
             public void onComplete(@NonNull Task task) {
-                if (task.isSuccessful()){
-                    registroResultado.setValue(true);
+                if (task.isSuccessful()) {
+                    registroResultado.setValue(true); //
+                } else {
+                    erro.setValue("Falha ao criar conta. Tente novamente.");
                 }
             }
-        });
+        }, task -> erro.setValue("O e-mail já está cadastrado."));
     }
 }
