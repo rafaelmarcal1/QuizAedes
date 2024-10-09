@@ -1,12 +1,14 @@
 package rafaelmarcal.ifsp.edu.quizaedes.ui.login;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-
 import rafaelmarcal.ifsp.edu.quizaedes.databinding.ActivityLoginBinding;
+import rafaelmarcal.ifsp.edu.quizaedes.ui.main.MainActivity;
 
 public class LoginActivity extends AppCompatActivity {
     private ActivityLoginBinding binding;
@@ -28,37 +30,52 @@ public class LoginActivity extends AppCompatActivity {
             String email = binding.etEmail.getText().toString().trim();
             String senha = binding.etPassword.getText().toString().trim();
 
-            if (!email.isEmpty() && !senha.isEmpty()) {
+            if (validarCampos(email, senha)) {
                 viewModel.fazerLogin(email, senha);
-            } else {
-                Toast.makeText(this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
             }
         });
 
         observarViewModel();
     }
 
+    private boolean validarCampos(String email, String senha) {
+        if (email.isEmpty()) {
+            Toast.makeText(this, "Preencha o email", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            Toast.makeText(this, "Email inválido", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (senha.isEmpty()) {
+            Toast.makeText(this, "Preencha a senha", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (senha.length() < 6) {
+            Toast.makeText(this, "A senha deve ter pelo menos 6 caracteres", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
+    }
+
     private void observarViewModel() {
         // Observa o sucesso do login
-        viewModel.getLoginResultado().observe(this, new Observer<Boolean>() {
-            @Override
-            public void onChanged(Boolean sucesso) {
-                if (sucesso) {
-                    Toast.makeText(LoginActivity.this, "Login bem-sucedido!", Toast.LENGTH_SHORT).show();
-                    // Navegar para a tela principal
-                } else {
-                    Toast.makeText(LoginActivity.this, "Falha no login", Toast.LENGTH_SHORT).show();
-                }
+        viewModel.getLoginResultado().observe(this, sucesso -> {
+            if (sucesso) {
+                Toast.makeText(LoginActivity.this, "Login bem-sucedido!", Toast.LENGTH_SHORT).show();
+                // Navegar para a tela principal
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();  // Finaliza a tela de login para que não possa voltar para ela com o botão de voltar
+            } else {
+                Toast.makeText(LoginActivity.this, "Falha no login", Toast.LENGTH_SHORT).show();
             }
         });
 
         // Observa os erros
-        viewModel.getErro().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(String mensagemErro) {
-                if (mensagemErro != null) {
-                    Toast.makeText(LoginActivity.this, mensagemErro, Toast.LENGTH_SHORT).show();
-                }
+        viewModel.getErro().observe(this, mensagemErro -> {
+            if (mensagemErro != null) {
+                Toast.makeText(LoginActivity.this, mensagemErro, Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -5,6 +5,8 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 
 public class LoginViewModel extends ViewModel {
     private FirebaseAuth auth = FirebaseAuth.getInstance();
@@ -27,7 +29,13 @@ public class LoginViewModel extends ViewModel {
                         _loginResultado.setValue(true);
                     } else {
                         _loginResultado.setValue(false);
-                        _erro.setValue(task.getException() != null ? task.getException().getMessage() : "Erro desconhecido");
+                        if (task.getException() instanceof FirebaseAuthInvalidUserException) {
+                            _erro.setValue("Usuário não encontrado");
+                        } else if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
+                            _erro.setValue("Senha incorreta");
+                        } else {
+                            _erro.setValue(task.getException() != null ? task.getException().getMessage() : "Erro desconhecido");
+                        }
                     }
                 });
     }
