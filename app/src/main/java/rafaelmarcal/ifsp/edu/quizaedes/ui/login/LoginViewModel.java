@@ -8,8 +8,13 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 
+import java.util.concurrent.CompletableFuture;
+
+import rafaelmarcal.ifsp.edu.quizaedes.data.model.User;
+import rafaelmarcal.ifsp.edu.quizaedes.data.repository.UserRepository;
+
 public class LoginViewModel extends ViewModel {
-    private FirebaseAuth auth = FirebaseAuth.getInstance();
+    private UserRepository repository = new UserRepository();
 
     private MutableLiveData<Boolean> _loginResultado = new MutableLiveData<>();
     public LiveData<Boolean> loginResultado = _loginResultado;
@@ -23,20 +28,19 @@ public class LoginViewModel extends ViewModel {
     }
 
     public void fazerLogin(String email, String senha) {
-        auth.signInWithEmailAndPassword(email, senha)
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        _loginResultado.setValue(true);
-                    } else {
-                        _loginResultado.setValue(false);
-                        if (task.getException() instanceof FirebaseAuthInvalidUserException) {
-                            _erro.setValue("Usuário não encontrado");
-                        } else if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
-                            _erro.setValue("Senha incorreta");
-                        } else {
-                            _erro.setValue(task.getException() != null ? task.getException().getMessage() : "Erro desconhecido");
-                        }
-                    }
-                });
+        CompletableFuture<User> future = repository.findByEmail(email);
+
+        future.thenAccept(user -> {
+            if (user.getPassword().equals(senha)) {
+                _loginResultado.setValue(true);
+            } else {
+                _loginResultado.setValue(false);
+                _erro.setValue("Senha incorreta.");
+            }
+        }).exceptionally(ex -> {
+            _loginResultado.setValue(false);
+            _erro.setValue("Usuário não enconrtado.");
+            return null;
+        });
     }
 }

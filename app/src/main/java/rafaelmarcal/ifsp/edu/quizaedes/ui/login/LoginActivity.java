@@ -39,22 +39,22 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private boolean validarCampos(String email, String senha) {
-        if (email.isEmpty()) {
-            Toast.makeText(this, "Preencha o email", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            Toast.makeText(this, "Email inválido", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        if (senha.isEmpty()) {
-            Toast.makeText(this, "Preencha a senha", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        if (senha.length() < 6) {
-            Toast.makeText(this, "A senha deve ter pelo menos 6 caracteres", Toast.LENGTH_SHORT).show();
-            return false;
-        }
+//        if (email.isEmpty()) {
+//            Toast.makeText(this, "Preencha o email", Toast.LENGTH_SHORT).show();
+//            return false;
+//        }
+//        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+//            Toast.makeText(this, "Email inválido", Toast.LENGTH_SHORT).show();
+//            return false;
+//        }
+//        if (senha.isEmpty()) {
+//            Toast.makeText(this, "Preencha a senha", Toast.LENGTH_SHORT).show();
+//            return false;
+//        }
+//        if (senha.length() < 6) {
+//            Toast.makeText(this, "A senha deve ter pelo menos 6 caracteres", Toast.LENGTH_SHORT).show();
+//            return false;
+//        }
         return true;
     }
 
@@ -64,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
             if (sucesso) {
                 Toast.makeText(LoginActivity.this, "Login bem-sucedido!", Toast.LENGTH_SHORT).show();
                 // Navegar para a tela principal
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
                 finish();  // Finaliza a tela de login para que não possa voltar para ela com o botão de voltar
             } else {
