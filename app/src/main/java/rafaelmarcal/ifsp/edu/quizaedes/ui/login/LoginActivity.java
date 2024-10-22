@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import rafaelmarcal.ifsp.edu.quizaedes.databinding.ActivityLoginBinding;
+import rafaelmarcal.ifsp.edu.quizaedes.ui.inicio.InicioActivity;
 import rafaelmarcal.ifsp.edu.quizaedes.ui.main.MainActivity;
 
 public class LoginActivity extends AppCompatActivity {
@@ -64,7 +65,7 @@ public class LoginActivity extends AppCompatActivity {
             if (sucesso) {
                 Toast.makeText(LoginActivity.this, "Login bem-sucedido!", Toast.LENGTH_SHORT).show();
                 // Navegar para a tela principal
-                Intent intent = new Intent(this, MainActivity.class);
+                Intent intent = new Intent(this, InicioActivity.class);
                 startActivity(intent);
                 finish();  // Finaliza a tela de login para que não possa voltar para ela com o botão de voltar
             } else {
