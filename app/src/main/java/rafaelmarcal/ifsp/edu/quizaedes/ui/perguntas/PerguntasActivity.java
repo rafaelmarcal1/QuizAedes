@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider;
 import rafaelmarcal.ifsp.edu.quizaedes.data.model.Pergunta;
 import rafaelmarcal.ifsp.edu.quizaedes.databinding.ActivityPerguntasBinding;
 
+
 public class PerguntasActivity extends AppCompatActivity {
 
     private ActivityPerguntasBinding binding;
