@@ -17,7 +17,8 @@ public class PerguntasRepository {
     private final MutableLiveData<List<Pergunta>> perguntasLiveData = new MutableLiveData<>();
 
     public MutableLiveData<List<Pergunta>> getPerguntas() {
-        db.collection(Constants.QUESTIONS_COLLECTION)  // Usando a constante aqui
+        db.collection(Constants.QUESTIONS_COLLECTION)
+                // Usando a constante aqui
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {

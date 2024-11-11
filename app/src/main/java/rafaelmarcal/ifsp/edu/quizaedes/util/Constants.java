@@ -6,6 +6,6 @@ public class Constants {
     public static final String ATTR_EMAIL = "email";
     public static final String ATTR_USERNAME = "username";
     public static final String ATTR_PASSWD = "password";
-    public static final String QUESTIONS_COLLECTION = "perguntas";
+    public static final String QUESTIONS_COLLECTION = "perguntas ";
 
 }

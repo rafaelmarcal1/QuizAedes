@@ -36,7 +36,7 @@ public class PerguntasActivity extends AppCompatActivity {
 
     private void exibirPergunta(Pergunta pergunta) {
         if (pergunta != null) {
-            binding.tvPergunta.setText(pergunta.getPergunta());
+            binding.tvPergunta.setText(pergunta.getTextoPergunta());
             binding.rbOpcaoA.setText(pergunta.getOpcoes().get(0));
             binding.rbOpcaoB.setText(pergunta.getOpcoes().get(1));
             binding.rbOpcaoC.setText(pergunta.getOpcoes().get(2));

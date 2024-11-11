@@ -3,7 +3,7 @@ package rafaelmarcal.ifsp.edu.quizaedes.data.model;
 import java.util.List;
 
 public class Pergunta {
-    private String pergunta;
+    private String textoPergunta;
     private List<String> opcoes;
     private int respostaCorreta;
 
@@ -11,13 +11,13 @@ public class Pergunta {
     public Pergunta() {}
 
     public Pergunta(String pergunta, List<String> opcoes, int respostaCorreta) {
-        this.pergunta = pergunta;
+        this.textoPergunta = pergunta;
         this.opcoes = opcoes;
         this.respostaCorreta = respostaCorreta;
     }
 
     // Getters e setters
-    public String getPergunta() { return pergunta; }
+    public String getTextoPergunta() { return textoPergunta; }
     public List<String> getOpcoes() { return opcoes; }
     public int getRespostaCorreta() { return respostaCorreta; }
 }
