@@ -1,82 +1,75 @@
 package rafaelmarcal.ifsp.edu.quizaedes.ui.perguntas;
-
 import android.os.Bundle;
-import android.widget.Button;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.TextView;
+import android.view.View;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
-
-import rafaelmarcal.ifsp.edu.quizaedes.R;
 import rafaelmarcal.ifsp.edu.quizaedes.data.model.Pergunta;
+import rafaelmarcal.ifsp.edu.quizaedes.databinding.ActivityPerguntasBinding;
 
 public class PerguntasActivity extends AppCompatActivity {
 
+    private ActivityPerguntasBinding binding;
     private PerguntasViewModel viewModel;
-    private TextView tvPergunta;
-    private RadioGroup rgOpcoes;
-    private Button btnConfirmarResposta;
-    private TextView tvFeedback;
+    private int errosPermitidos = 2;
+    private int erros = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_perguntas);
-
-        tvPergunta = findViewById(R.id.tvPergunta);
-        rgOpcoes = findViewById(R.id.rgOpcoes);
-        btnConfirmarResposta = findViewById(R.id.btnConfirmarResposta);
-        tvFeedback = findViewById(R.id.tvFeedback);
+        binding = ActivityPerguntasBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         viewModel = new ViewModelProvider(this).get(PerguntasViewModel.class);
+        viewModel.getPerguntas().observe(this, perguntas -> {
+            if (perguntas != null && !perguntas.isEmpty()) {
+                viewModel.embaralharPerguntas();
+                exibirPergunta(viewModel.getPerguntaAtual());
+            } else {
+                Toast.makeText(this, "Erro ao carregar perguntas.", Toast.LENGTH_SHORT).show();
+            }
+        });
 
-        observarViewModel();
-        configurarBotaoConfirmar();
+        binding.btnConfirmarResposta.setOnClickListener(v -> conferirResposta());
     }
 
-    private void observarViewModel() {
-        // Observa a pergunta atual
-        viewModel.getPerguntaAtual().observe(this, pergunta -> {
-            tvPergunta.setText(pergunta.getEnunciado());
-            ((RadioButton) rgOpcoes.getChildAt(0)).setText(pergunta.getOpcoes().get(0));
-            ((RadioButton) rgOpcoes.getChildAt(1)).setText(pergunta.getOpcoes().get(1));
-            ((RadioButton) rgOpcoes.getChildAt(2)).setText(pergunta.getOpcoes().get(2));
-            ((RadioButton) rgOpcoes.getChildAt(3)).setText(pergunta.getOpcoes().get(3));
-            rgOpcoes.clearCheck();
-        });
-
-        // Observa o resultado da resposta
-        viewModel.getRespostaCorreta().observe(this, correta -> {
-            if (correta) {
-                tvFeedback.setText("Resposta Correta!");
-                tvFeedback.setVisibility(TextView.VISIBLE);
-            } else {
-                tvFeedback.setText("Resposta Errada!");
-                tvFeedback.setVisibility(TextView.VISIBLE);
-            }
-        });
-
-        // Observa o número de erros
-        viewModel.getErros().observe(this, erros -> {
-            if (erros >= 2) {
-                Toast.makeText(this, "Você perdeu o jogo!", Toast.LENGTH_SHORT).show();
-                finish();
-            }
-        });
+    private void exibirPergunta(Pergunta pergunta) {
+        if (pergunta != null) {
+            binding.tvPergunta.setText(pergunta.getPergunta());
+            binding.rbOpcaoA.setText(pergunta.getOpcoes().get(0));
+            binding.rbOpcaoB.setText(pergunta.getOpcoes().get(1));
+            binding.rbOpcaoC.setText(pergunta.getOpcoes().get(2));
+            binding.rbOpcaoD.setText(pergunta.getOpcoes().get(3));
+            binding.tvFeedback.setVisibility(View.GONE);
+            binding.rgOpcoes.clearCheck();
+        }
     }
 
-    private void configurarBotaoConfirmar() {
-        btnConfirmarResposta.setOnClickListener(v -> {
-            int idSelecionado = rgOpcoes.getCheckedRadioButtonId();
-            if (idSelecionado != -1) {
-                int indiceResposta = rgOpcoes.indexOfChild(findViewById(idSelecionado));
-                viewModel.verificarResposta(indiceResposta);
+    private void conferirResposta() {
+        Pergunta perguntaAtual = viewModel.getPerguntaAtual();
+        if (perguntaAtual != null) {
+            int respostaSelecionada = binding.rgOpcoes.indexOfChild(findViewById(binding.rgOpcoes.getCheckedRadioButtonId()));
+            if (respostaSelecionada == perguntaAtual.getRespostaCorreta()) {
+                binding.tvFeedback.setText("Resposta correta!");
+                binding.tvFeedback.setVisibility(View.VISIBLE);
+                viewModel.avancarPergunta();
+                exibirPergunta(viewModel.getPerguntaAtual());
             } else {
-                Toast.makeText(this, "Por favor, selecione uma resposta", Toast.LENGTH_SHORT).show();
+                erros++;
+                if (erros > errosPermitidos) {
+                    Toast.makeText(this, "Você perdeu o jogo!", Toast.LENGTH_LONG).show();
+                    viewModel.reiniciarQuiz();
+                    erros = 0;
+                } else {
+                    binding.tvFeedback.setText("Resposta incorreta. Tente novamente.");
+                    binding.tvFeedback.setVisibility(View.VISIBLE);
+                }
             }
-        });
+        } else {
+            Toast.makeText(this, "Fim do quiz!", Toast.LENGTH_SHORT).show();
+            viewModel.reiniciarQuiz();
+            erros = 0;
+            exibirPergunta(viewModel.getPerguntaAtual());
+        }
     }
 }
