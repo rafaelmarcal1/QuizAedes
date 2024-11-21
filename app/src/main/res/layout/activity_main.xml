@@ -15,7 +15,7 @@
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:contentDescription="@string/logo_do_aplicativo"
-        android:src="@drawable/ic_logo"
+        android:src="@drawable/logo"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/btnLogin"
         app:layout_constraintStart_toStartOf="parent"
