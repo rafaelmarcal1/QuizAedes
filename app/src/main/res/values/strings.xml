@@ -26,4 +26,6 @@
     <string name="notifica_btn">Notificações</string>
     <string name="privacidade_botaoconfiguracoes">Privacidade</string>
     <string name="sair_btn_config">Sair</string>
+    <string name="app_logo">Logo do aplicativo</string>
+    <string name="splash_message">Carregando o conhecimento para o quiz...</string>
 </resources>
