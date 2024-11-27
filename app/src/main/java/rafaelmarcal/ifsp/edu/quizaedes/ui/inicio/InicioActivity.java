@@ -60,30 +60,4 @@ public class InicioActivity extends AppCompatActivity {
             startActivity(intent);
         });
     }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        if (mediaPlayer != null && mediaPlayer.isPlaying()) {
-            mediaPlayer.pause(); // Pausa a música ao sair da Activity
-        }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (mediaPlayer != null && !mediaPlayer.isPlaying()) {
-            mediaPlayer.start(); // Retoma a música ao voltar à Activity
-        }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (mediaPlayer != null) {
-            mediaPlayer.release(); // Libera os recursos ao destruir a Activity
-            mediaPlayer = null;
-            binding = null; // Liberar o binding quando a Activity for destruída
-        }
-    }
 }
