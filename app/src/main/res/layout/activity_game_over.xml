@@ -1,0 +1,55 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Título "Game Over" -->
+    <TextView
+        android:id="@+id/tvGameOver"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tela_game_over"
+        android:textSize="48sp"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp" />
+
+    <!-- Mensagem com a pontuação final -->
+    <TextView
+        android:id="@+id/tvFinalScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sua_pontuacao"
+        android:textSize="24sp"
+        android:textColor="#FFFFFF"
+        android:layout_below="@id/tvGameOver"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp" />
+
+    <!-- Botão para reiniciar o jogo -->
+    <Button
+        android:id="@+id/btnRestart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/reiniciar_game_over"
+        android:textSize="18sp"
+        android:background="@drawable/button_background"
+        android:textColor="#FFFFFF"
+        android:layout_below="@id/tvFinalScore"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp" />
+
+    <!-- Botão para sair do jogo -->
+    <Button
+        android:id="@+id/btnExit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sair_game_over"
+        android:textSize="18sp"
+        android:background="@drawable/button_background"
+        android:textColor="#FFFFFF"
+        android:layout_below="@id/btnRestart"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp" />
+
+</RelativeLayout>

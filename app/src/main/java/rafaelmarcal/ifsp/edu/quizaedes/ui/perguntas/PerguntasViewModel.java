@@ -27,6 +27,7 @@ public class PerguntasViewModel extends ViewModel {
         }
     }
 
+
     public Pergunta getPerguntaAtual() {
         List<Pergunta> perguntas = perguntasLiveData.getValue();
         return (perguntas != null && !perguntas.isEmpty()) ? perguntas.get(perguntaAtualIndex) : null;

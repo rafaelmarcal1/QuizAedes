@@ -28,4 +28,8 @@
     <string name="sair_btn_config">Sair</string>
     <string name="app_logo">Logo do aplicativo</string>
     <string name="splash_message">Carregando o conhecimento para o quiz...</string>
+    <string name="tela_game_over">Game Over</string>
+    <string name="sua_pontuacao">Sua Pontuação: 0</string>
+    <string name="sair_game_over">Sair</string>
+    <string name="reiniciar_game_over">Reiniciar</string>
 </resources>

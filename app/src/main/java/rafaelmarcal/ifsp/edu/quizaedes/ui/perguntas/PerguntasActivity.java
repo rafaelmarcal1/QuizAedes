@@ -1,4 +1,5 @@
 package rafaelmarcal.ifsp.edu.quizaedes.ui.perguntas;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -6,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import rafaelmarcal.ifsp.edu.quizaedes.data.model.Pergunta;
 import rafaelmarcal.ifsp.edu.quizaedes.databinding.ActivityPerguntasBinding;
+import rafaelmarcal.ifsp.edu.quizaedes.ui.gameover.GameOverActivity;
 
 
 public class PerguntasActivity extends AppCompatActivity {
@@ -58,9 +60,10 @@ public class PerguntasActivity extends AppCompatActivity {
             } else {
                 erros++;
                 if (erros > errosPermitidos) {
-                    Toast.makeText(this, "Você perdeu o jogo!", Toast.LENGTH_LONG).show();
-                    viewModel.reiniciarQuiz();
-                    erros = 0;
+                    // Redirecionar para a tela de Game Over
+                    Intent intent = new Intent(this, GameOverActivity.class);
+                    startActivity(intent);
+                    finish(); // Finaliza a activity atual
                 } else {
                     binding.tvFeedback.setText("Resposta incorreta. Tente novamente.");
                     binding.tvFeedback.setVisibility(View.VISIBLE);
