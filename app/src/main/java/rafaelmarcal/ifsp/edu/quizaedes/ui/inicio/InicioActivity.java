@@ -17,16 +17,10 @@ import rafaelmarcal.ifsp.edu.quizaedes.ui.splash.CountdownActivity;
 public class InicioActivity extends AppCompatActivity {
 
     private ActivityInicioBinding binding; // Declarando o binding
-    private MediaPlayer mediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // Inicializa o MediaPlayer
-        mediaPlayer = MediaPlayer.create(this, R.raw.music);
-        mediaPlayer.setLooping(true); // Define o loop
-        mediaPlayer.start(); // Começa a reprodução
 
         // Inicializando o ViewBinding
         binding = ActivityInicioBinding.inflate(getLayoutInflater());
@@ -34,10 +28,10 @@ public class InicioActivity extends AppCompatActivity {
 
         // Definir listeners para os botões usando binding
         binding.btnIniciarJogo.setOnClickListener(v -> {
-            Intent intent = new Intent(this, CountdownActivity.class);
-            startActivity(intent);
-            //Intent intent = new Intent(InicioActivity.this, PerguntasActivity.class);
+            //Intent intent = new Intent(this, CountdownActivity.class);
             //startActivity(intent);
+            Intent intent = new Intent(InicioActivity.this, CountdownActivity.class);
+            startActivity(intent);
         });
 
         binding.btnConquistas.setOnClickListener(v -> {

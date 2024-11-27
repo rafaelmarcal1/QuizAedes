@@ -58,6 +58,10 @@
         <activity
             android:name=".ui.main.MainActivity"
             android:exported="true" />
+        <activity android:name=".ui.gameover.GameOverActivity"
+            android:exported="false"/>
+        <activity android:name=".ui.splash.CountdownActivity"
+            android:exported="false"/>
     </application>
 
 </manifest>
