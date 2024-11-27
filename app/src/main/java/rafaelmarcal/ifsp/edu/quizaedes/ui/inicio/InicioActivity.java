@@ -12,6 +12,7 @@ import rafaelmarcal.ifsp.edu.quizaedes.ui.conquistas.ConquistasActivity;
 import rafaelmarcal.ifsp.edu.quizaedes.ui.ranking.RankingActivity;
 import rafaelmarcal.ifsp.edu.quizaedes.ui.perfil.PerfilActivity;
 import rafaelmarcal.ifsp.edu.quizaedes.ui.configuracoes.ConfiguracoesActivity;
+import rafaelmarcal.ifsp.edu.quizaedes.ui.splash.CountdownActivity;
 
 public class InicioActivity extends AppCompatActivity {
 
@@ -33,8 +34,10 @@ public class InicioActivity extends AppCompatActivity {
 
         // Definir listeners para os botões usando binding
         binding.btnIniciarJogo.setOnClickListener(v -> {
-            Intent intent = new Intent(InicioActivity.this, PerguntasActivity.class);
+            Intent intent = new Intent(this, CountdownActivity.class);
             startActivity(intent);
+            //Intent intent = new Intent(InicioActivity.this, PerguntasActivity.class);
+            //startActivity(intent);
         });
 
         binding.btnConquistas.setOnClickListener(v -> {
