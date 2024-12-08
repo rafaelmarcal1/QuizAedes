@@ -1,0 +1,38 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:gravity="center">
+
+    <TextView
+        android:id="@+id/tvTitleWelcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/telaExplicativaWellcome"
+        android:textColor="@color/textColorPrimary"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:paddingBottom="16dp" />
+
+    <TextView
+        android:id="@+id/tvDescriptionWelcome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Mensagem1TelaExplicativa"
+        android:textColor="@color/primaryColor"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:lineSpacingExtra="8dp"
+        android:paddingBottom="24dp" />
+
+    <Button
+        android:id="@+id/btnNextWelcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/next"
+        android:background="@drawable/button_background"
+        android:padding="12dp"
+        android:textColor="@color/textColorPrimary" />
+</LinearLayout>

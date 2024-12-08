@@ -13,6 +13,7 @@ import rafaelmarcal.ifsp.edu.quizaedes.ui.ranking.RankingActivity;
 import rafaelmarcal.ifsp.edu.quizaedes.ui.perfil.PerfilActivity;
 import rafaelmarcal.ifsp.edu.quizaedes.ui.configuracoes.ConfiguracoesActivity;
 import rafaelmarcal.ifsp.edu.quizaedes.ui.splash.CountdownActivity;
+import rafaelmarcal.ifsp.edu.quizaedes.ui.telas_explicativas.SejaBemVindoActivity;
 
 public class InicioActivity extends AppCompatActivity {
 
@@ -51,6 +52,11 @@ public class InicioActivity extends AppCompatActivity {
 
         binding.btnConfiguracoes.setOnClickListener(v -> {
             Intent intent = new Intent(InicioActivity.this, ConfiguracoesActivity.class);
+            startActivity(intent);
+        });
+
+        binding.btnComoJogar.setOnClickListener(v -> {
+            Intent intent = new Intent(InicioActivity.this, SejaBemVindoActivity.class);
             startActivity(intent);
         });
     }

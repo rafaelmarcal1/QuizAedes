@@ -1,0 +1,38 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:gravity="center">
+
+    <TextView
+        android:id="@+id/tvTitleRewards"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ganhe_trof_us_e_moedas"
+        android:textColor="@color/textColorPrimary"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:paddingBottom="16dp" />
+
+    <TextView
+        android:id="@+id/tvDescriptionRewards"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/SobreTrofeusMoedas"
+        android:textColor="@color/primaryColor"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:lineSpacingExtra="8dp"
+        android:paddingBottom="24dp" />
+
+    <Button
+        android:id="@+id/btnFinishIntro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/vamos_come_ar"
+        android:background="@drawable/button_background"
+        android:padding="12dp"
+        android:textColor="@color/textColorPrimary" />
+</LinearLayout>

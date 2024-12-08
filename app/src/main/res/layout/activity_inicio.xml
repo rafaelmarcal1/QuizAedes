@@ -82,4 +82,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp" />
 
+    <!-- Botão para configurações -->
+    <Button
+        android:id="@+id/btnComoJogar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/botao_como_jogar"
+        android:background="@drawable/button_background"
+        android:textColor="@color/textColorPrimary"
+        android:drawableStart="@drawable/settings"
+        android:drawablePadding="8dp"
+        app:layout_constraintTop_toBottomOf="@id/btnConfiguracoes"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

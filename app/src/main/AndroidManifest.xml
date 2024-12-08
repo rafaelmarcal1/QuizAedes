@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -11,23 +12,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.QuizAedes"
         tools:targetApi="31">
-
-        <!-- Declaração do MusicService -->
+        <activity
+            android:name=".ui.telas_explicativas.RecompensasActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.telas_explicativas.SejaBemVindoActivity"
+            android:exported="false" /> <!-- Declaração do MusicService -->
         <service
             android:name=".services.MusicService"
-            android:exported="false" />
-
-        <!-- SplashActivity como atividade inicial -->
+            android:exported="false" /> <!-- SplashActivity como atividade inicial -->
         <activity
             android:name=".ui.splash.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-        <!-- Outras atividades -->
+        </activity> <!-- Outras atividades -->
         <activity
             android:name=".ui.login.ForgotPasswordActivity"
             android:exported="false" />
@@ -58,10 +60,12 @@
         <activity
             android:name=".ui.main.MainActivity"
             android:exported="true" />
-        <activity android:name=".ui.gameover.GameOverActivity"
-            android:exported="false"/>
-        <activity android:name=".ui.splash.CountdownActivity"
-            android:exported="false"/>
+        <activity
+            android:name=".ui.gameover.GameOverActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.splash.CountdownActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

@@ -32,4 +32,11 @@
     <string name="sua_pontuacao">Sua Pontuação: 0</string>
     <string name="sair_game_over">Sair</string>
     <string name="reiniciar_game_over">Reiniciar</string>
+    <string name="telaExplicativaWellcome">Seja Bem-vindo ao Quiz Aedes!</string>
+    <string name="Mensagem1TelaExplicativa">Este é um Serious Game criado para disseminar informações verdadeiras e relevantes sobre o Aedes aegypti e as doenças transmitidas por ele. Divirta-se e aprenda ao mesmo tempo!</string>
+    <string name="next">Próximo</string>
+    <string name="ganhe_trof_us_e_moedas">Ganhe Troféus e Moedas!</string>
+    <string name="SobreTrofeusMoedas">À medida que você ganha o jogo, receberá troféus e moedas. Esses prêmios poderão ser usados para desbloquear novas funcionalidades e melhorar sua experiência no aplicativo!</string>
+    <string name="vamos_come_ar">Vamos Começar!</string>
+    <string name="botao_como_jogar">Como jogar</string>
 </resources>
