@@ -11,6 +11,7 @@ public class PerguntasViewModel extends ViewModel {
     private final PerguntasRepository repository;
     private final MutableLiveData<List<Pergunta>> perguntasLiveData;
     private int perguntaAtualIndex = 0;
+    private int pontuacao = 0;
 
     public PerguntasViewModel() {
         repository = new PerguntasRepository();
@@ -37,6 +38,18 @@ public class PerguntasViewModel extends ViewModel {
         if (perguntasLiveData.getValue() != null && perguntaAtualIndex < perguntasLiveData.getValue().size() - 1) {
             perguntaAtualIndex++;
         }
+    }
+
+    public void adicionarPontos(int pontos) {
+        pontuacao += pontos;
+    }
+
+    public int getPontuacao() {
+        return pontuacao;
+    }
+
+    public void resetarPontuacao() {
+        pontuacao = 0;
     }
 
     public void reiniciarQuiz() {

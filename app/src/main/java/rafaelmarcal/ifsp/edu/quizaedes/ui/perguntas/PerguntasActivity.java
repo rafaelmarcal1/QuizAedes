@@ -34,6 +34,9 @@ public class PerguntasActivity extends AppCompatActivity {
         });
 
         binding.btnConfirmarResposta.setOnClickListener(v -> conferirResposta());
+
+        // Atualizar a pontuação inicial na interface
+        atualizarPontuacao();
     }
 
     private void exibirPergunta(Pergunta pergunta) {
@@ -55,6 +58,12 @@ public class PerguntasActivity extends AppCompatActivity {
             if (respostaSelecionada == perguntaAtual.getRespostaCorreta()) {
                 binding.tvFeedback.setText("Resposta correta!");
                 binding.tvFeedback.setVisibility(View.VISIBLE);
+
+                // Adicionar pontos e atualizar a interface
+                viewModel.adicionarPontos(10);
+                atualizarPontuacao();
+
+                // Avançar para a próxima pergunta
                 viewModel.avancarPergunta();
                 exibirPergunta(viewModel.getPerguntaAtual());
             } else {
@@ -75,5 +84,10 @@ public class PerguntasActivity extends AppCompatActivity {
             erros = 0;
             exibirPergunta(viewModel.getPerguntaAtual());
         }
+    }
+
+    private void atualizarPontuacao() {
+        // Atualiza o TextView da pontuação com o valor atual
+        binding.tvPontuacao.setText("Pontos: " + viewModel.getPontuacao());
     }
 }
