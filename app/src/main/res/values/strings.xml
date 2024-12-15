@@ -39,4 +39,6 @@
     <string name="SobreTrofeusMoedas">À medida que você ganha o jogo, receberá troféus e moedas. Esses prêmios poderão ser usados para desbloquear novas funcionalidades e melhorar sua experiência no aplicativo!</string>
     <string name="vamos_come_ar">Vamos Começar!</string>
     <string name="botao_como_jogar">Como jogar</string>
+    <string name="botaosairtelainicio">Sair</string>
+    <string name="sair">Sair</string>
 </resources>

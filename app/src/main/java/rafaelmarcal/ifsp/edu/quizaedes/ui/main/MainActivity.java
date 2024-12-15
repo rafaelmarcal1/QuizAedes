@@ -1,5 +1,6 @@
 package rafaelmarcal.ifsp.edu.quizaedes.ui.main;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -51,6 +52,18 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, rafaelmarcal.ifsp.edu.quizaedes.ui.perguntas.PerguntasActivity.class);
                 startActivity(intent);
             }
+        });
+
+        binding.btnSairInicio.setOnClickListener(v -> {
+            new AlertDialog.Builder(this)
+                    .setTitle("Confirmação")
+                    .setMessage("Você realmente deseja sair do APP?")
+                    .setPositiveButton("Sim", (dialog, which) -> {
+                        finish(); // Fecha a Activity atual
+                        System.exit(0); // Encerra o processo do aplicativo
+                    })
+                    .setNegativeButton("Não", (dialog, which) -> dialog.dismiss()) // Fecha o diálogo
+                    .show();
         });
     }
 }

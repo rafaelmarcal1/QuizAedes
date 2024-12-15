@@ -3,6 +3,8 @@ package rafaelmarcal.ifsp.edu.quizaedes.ui.inicio;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import rafaelmarcal.ifsp.edu.quizaedes.R;
@@ -59,5 +61,19 @@ public class InicioActivity extends AppCompatActivity {
             Intent intent = new Intent(InicioActivity.this, SejaBemVindoActivity.class);
             startActivity(intent);
         });
+
+        // Listener para o botão "Sair"
+        binding.btnSair.setOnClickListener(v -> {
+            new AlertDialog.Builder(this)
+                    .setTitle("Confirmação")
+                    .setMessage("Você realmente deseja sair do APP?")
+                    .setPositiveButton("Sim", (dialog, which) -> {
+                        finish(); // Fecha a activity
+                        System.exit(0); // Encerra o processo do app
+                    })
+                    .setNegativeButton("Não", (dialog, which) -> dialog.dismiss()) // Fecha o diálogo
+                    .show();
+        });
+
     }
 }

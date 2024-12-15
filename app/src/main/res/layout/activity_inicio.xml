@@ -97,4 +97,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp" />
 
+    <!-- Botão para sair -->
+    <Button
+        android:id="@+id/btnSair"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/botaosairtelainicio"
+        android:background="@drawable/button_background"
+        android:textColor="@color/textColorPrimary"
+        android:drawablePadding="8dp"
+        app:layout_constraintTop_toBottomOf="@id/btnComoJogar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

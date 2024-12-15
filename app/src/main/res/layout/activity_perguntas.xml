@@ -5,7 +5,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.perguntas.PerguntasActivity">
+    tools:context=".ui.perguntas.PerguntasActivity"
+    android:padding="16dp">
 
     <!-- Pontuação -->
     <TextView
@@ -27,7 +28,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Aqui vai a pergunta..."
-        android:textSize="18sp"
+        android:textSize="20sp"
+        android:textStyle="bold"
         android:textColor="#000"
         android:padding="16dp"
         app:layout_constraintTop_toBottomOf="@id/tvPontuacao"
@@ -40,34 +42,59 @@
         android:id="@+id/rgOpcoes"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@id/tvPergunta"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp">
 
+        <!-- Opção A -->
         <RadioButton
             android:id="@+id/rbOpcaoA"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Opção A" />
+            android:padding="16dp"
+            android:background="@drawable/radio_button_background"
+            android:text="Opção A"
+            android:textSize="18sp"
+            android:textColor="#000"
+            android:button="@null" />
 
+        <!-- Opção B -->
         <RadioButton
             android:id="@+id/rbOpcaoB"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Opção B" />
+            android:padding="16dp"
+            android:background="@drawable/radio_button_background"
+            android:text="Opção B"
+            android:textSize="18sp"
+            android:textColor="#000"
+            android:button="@null" />
 
+        <!-- Opção C -->
         <RadioButton
             android:id="@+id/rbOpcaoC"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Opção C" />
+            android:padding="16dp"
+            android:background="@drawable/radio_button_background"
+            android:text="Opção C"
+            android:textSize="18sp"
+            android:textColor="#000"
+            android:button="@null" />
 
+        <!-- Opção D -->
         <RadioButton
             android:id="@+id/rbOpcaoD"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Opção D" />
+            android:padding="16dp"
+            android:background="@drawable/radio_button_background"
+            android:text="Opção D"
+            android:textSize="18sp"
+            android:textColor="#000"
+            android:button="@null" />
     </RadioGroup>
 
     <!-- Botão para confirmar resposta -->
@@ -77,10 +104,10 @@
         android:layout_height="wrap_content"
         android:text="Confirmar Resposta"
         android:textStyle="bold"
+        android:layout_marginTop="16dp"
         app:layout_constraintTop_toBottomOf="@id/rgOpcoes"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"
         android:backgroundTint="@color/primaryColor"
         android:textColor="@android:color/white" />
 
