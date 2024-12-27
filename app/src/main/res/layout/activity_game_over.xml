@@ -1,55 +1,51 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="16dp">
 
-    <!-- Título "Game Over" -->
+    <!-- Pontuação Final -->
     <TextView
-        android:id="@+id/tvGameOver"
+        android:id="@+id/tvPontuacaoFinal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/tela_game_over"
-        android:textSize="48sp"
+        android:text="Pontuação Final: 0"
+        android:textSize="24sp"
         android:textStyle="bold"
         android:textColor="#FFFFFF"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="80dp"/>
 
-    <!-- Mensagem com a pontuação final -->
-    <TextView
-        android:id="@+id/tvFinalScore"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/sua_pontuacao"
-        android:textSize="24sp"
-        android:textColor="#FFFFFF"
-        android:layout_below="@id/tvGameOver"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp" />
-
-    <!-- Botão para reiniciar o jogo -->
+    <!-- Botão para Jogar Novamente -->
     <Button
-        android:id="@+id/btnRestart"
+        android:id="@+id/btnJogarNovamente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/reiniciar_game_over"
-        android:textSize="18sp"
-        android:background="@drawable/button_background"
-        android:textColor="#FFFFFF"
-        android:layout_below="@id/tvFinalScore"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp" />
+        android:text="Jogar Novamente"
+        android:textStyle="bold"
+        android:layout_marginTop="32dp"
+        app:layout_constraintTop_toBottomOf="@id/tvPontuacaoFinal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:backgroundTint="@color/primaryColor"
+        android:textColor="@android:color/white" />
 
-    <!-- Botão para sair do jogo -->
+    <!-- Botão para Sair -->
     <Button
-        android:id="@+id/btnExit"
+        android:id="@+id/btnSair"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/sair_game_over"
-        android:textSize="18sp"
-        android:background="@drawable/button_background"
-        android:textColor="#FFFFFF"
-        android:layout_below="@id/btnRestart"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp" />
+        android:text="Sair"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/btnJogarNovamente"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:backgroundTint="@android:color/holo_red_light"
+        android:textColor="@android:color/white" />
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

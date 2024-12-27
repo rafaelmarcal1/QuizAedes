@@ -69,10 +69,11 @@ public class PerguntasActivity extends AppCompatActivity {
             } else {
                 erros++;
                 if (erros > errosPermitidos) {
-                    // Redirecionar para a tela de Game Over
-                    Intent intent = new Intent(this, GameOverActivity.class);
+                    // Redirecionar para a tela de GameOver com a pontuação
+                    Intent intent = new Intent(PerguntasActivity.this, GameOverActivity.class);
+                    intent.putExtra("PONTUACAO", viewModel.getPontuacao());
                     startActivity(intent);
-                    finish(); // Finaliza a activity atual
+                    finish();
                 } else {
                     binding.tvFeedback.setText("Resposta incorreta. Tente novamente.");
                     binding.tvFeedback.setVisibility(View.VISIBLE);
@@ -80,9 +81,10 @@ public class PerguntasActivity extends AppCompatActivity {
             }
         } else {
             Toast.makeText(this, "Fim do quiz!", Toast.LENGTH_SHORT).show();
-            viewModel.reiniciarQuiz();
-            erros = 0;
-            exibirPergunta(viewModel.getPerguntaAtual());
+            Intent intent = new Intent(PerguntasActivity.this, GameOverActivity.class);
+            intent.putExtra("PONTUACAO", viewModel.getPontuacao());
+            startActivity(intent);
+            finish();
         }
     }
 
