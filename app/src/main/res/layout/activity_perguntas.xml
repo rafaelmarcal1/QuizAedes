@@ -58,7 +58,8 @@
             android:text="Opção A"
             android:textSize="18sp"
             android:textColor="#000"
-            android:button="@null" />
+            android:button="@null"
+            android:layout_marginBottom="8dp" />
 
         <!-- Opção B -->
         <RadioButton
@@ -70,7 +71,8 @@
             android:text="Opção B"
             android:textSize="18sp"
             android:textColor="#000"
-            android:button="@null" />
+            android:button="@null"
+            android:layout_marginBottom="8dp" />
 
         <!-- Opção C -->
         <RadioButton
@@ -82,7 +84,8 @@
             android:text="Opção C"
             android:textSize="18sp"
             android:textColor="#000"
-            android:button="@null" />
+            android:button="@null"
+            android:layout_marginBottom="8dp" />
 
         <!-- Opção D -->
         <RadioButton
@@ -96,7 +99,6 @@
             android:textColor="#000"
             android:button="@null" />
     </RadioGroup>
-
     <!-- Botão para confirmar resposta -->
     <Button
         android:id="@+id/btnConfirmarResposta"

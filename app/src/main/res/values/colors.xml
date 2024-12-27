@@ -8,4 +8,8 @@
     <!-- Cores para o Texto -->
     <color name="textColorPrimary">#FFFFFF</color>
     <color name="textColorSecondary">#000000</color>
+
+    <!-- Mais cores -->
+    <color name="primaryDarkColor">#363636</color>
+
 </resources>
