@@ -102,7 +102,7 @@
     <!-- Botão para confirmar resposta -->
     <Button
         android:id="@+id/btnConfirmarResposta"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Confirmar Resposta"
         android:textStyle="bold"
