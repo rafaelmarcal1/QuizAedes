@@ -1,5 +1,6 @@
 package rafaelmarcal.ifsp.edu.quizaedes.data.model;
 
+import java.util.Collections;
 import java.util.List;
 
 public class Pergunta {
@@ -20,4 +21,11 @@ public class Pergunta {
     public String getTextoPergunta() { return textoPergunta; }
     public List<String> getOpcoes() { return opcoes; }
     public int getRespostaCorreta() { return respostaCorreta; }
+
+    // Método para embaralhar as opções
+    public void embaralharOpcoes() {
+        String respostaCorretaTexto = opcoes.get(respostaCorreta);
+        Collections.shuffle(opcoes);
+        respostaCorreta = opcoes.indexOf(respostaCorretaTexto);
+    }
 }

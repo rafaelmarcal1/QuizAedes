@@ -31,7 +31,12 @@ public class PerguntasViewModel extends ViewModel {
 
     public Pergunta getPerguntaAtual() {
         List<Pergunta> perguntas = perguntasLiveData.getValue();
-        return (perguntas != null && !perguntas.isEmpty()) ? perguntas.get(perguntaAtualIndex) : null;
+        if (perguntas != null && !perguntas.isEmpty()) {
+            Pergunta perguntaAtual = perguntas.get(perguntaAtualIndex);
+            perguntaAtual.embaralharOpcoes(); // Embaralhar as opções da pergunta atual
+            return perguntaAtual;
+        }
+        return null;
     }
 
     public void avancarPergunta() {
