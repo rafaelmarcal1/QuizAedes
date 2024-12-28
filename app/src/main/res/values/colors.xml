@@ -12,5 +12,7 @@
     <!-- Mais cores -->
     <color name="primaryDarkColor">#363636</color>
     <color name="holo_red_light">#FF0000</color>
+    <color name="red">#920E04</color>
+    <color name="green">#0C8A02</color>
 
 </resources>

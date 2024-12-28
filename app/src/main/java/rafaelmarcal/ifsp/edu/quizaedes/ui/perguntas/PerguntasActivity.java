@@ -5,6 +5,8 @@ import android.view.View;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
+
+import rafaelmarcal.ifsp.edu.quizaedes.R;
 import rafaelmarcal.ifsp.edu.quizaedes.data.model.Pergunta;
 import rafaelmarcal.ifsp.edu.quizaedes.databinding.ActivityPerguntasBinding;
 import rafaelmarcal.ifsp.edu.quizaedes.ui.gameover.GameOverActivity;
@@ -56,17 +58,22 @@ public class PerguntasActivity extends AppCompatActivity {
         if (perguntaAtual != null) {
             int respostaSelecionada = binding.rgOpcoes.indexOfChild(findViewById(binding.rgOpcoes.getCheckedRadioButtonId()));
             if (respostaSelecionada == perguntaAtual.getRespostaCorreta()) {
+                // Resposta correta
                 binding.tvFeedback.setText("Resposta correta!");
+                binding.tvFeedback.setTextColor(getResources().getColor(R.color.green)); // Define a cor do texto para verde
                 binding.tvFeedback.setVisibility(View.VISIBLE);
 
                 // Adicionar pontos e atualizar a interface
                 viewModel.adicionarPontos(10);
                 atualizarPontuacao();
 
-                // Avançar para a próxima pergunta
-                viewModel.avancarPergunta();
-                exibirPergunta(viewModel.getPerguntaAtual());
+                // Aguardar um pequeno atraso antes de avançar para a próxima pergunta
+                binding.btnConfirmarResposta.postDelayed(() -> {
+                    viewModel.avancarPergunta();
+                    exibirPergunta(viewModel.getPerguntaAtual());
+                }, 1000); // 1 segundo de atraso
             } else {
+                // Resposta incorreta
                 erros++;
                 if (erros > errosPermitidos) {
                     // Redirecionar para a tela de GameOver com a pontuação
@@ -76,6 +83,7 @@ public class PerguntasActivity extends AppCompatActivity {
                     finish();
                 } else {
                     binding.tvFeedback.setText("Resposta incorreta. Tente novamente.");
+                    binding.tvFeedback.setTextColor(getResources().getColor(R.color.red)); // Define a cor do texto para vermelho
                     binding.tvFeedback.setVisibility(View.VISIBLE);
                 }
             }
