@@ -1,8 +1,10 @@
 package rafaelmarcal.ifsp.edu.quizaedes.ui.perguntas;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -14,7 +16,7 @@ import rafaelmarcal.ifsp.edu.quizaedes.R;
 import rafaelmarcal.ifsp.edu.quizaedes.data.model.Pergunta;
 import rafaelmarcal.ifsp.edu.quizaedes.databinding.ActivityPerguntasBinding;
 import rafaelmarcal.ifsp.edu.quizaedes.ui.gameover.GameOverActivity;
-
+import rafaelmarcal.ifsp.edu.quizaedes.ui.splash.SplashScreenActivity;
 
 public class PerguntasActivity extends AppCompatActivity {
 
@@ -22,6 +24,8 @@ public class PerguntasActivity extends AppCompatActivity {
     private PerguntasViewModel viewModel;
     private int errosPermitidos = 2;
     private int erros = 0;
+    private int nivelAtual = 1;
+    private int respostasCorretasConsecutivas = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +34,8 @@ public class PerguntasActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         viewModel = new ViewModelProvider(this).get(PerguntasViewModel.class);
+
+        // Observando as perguntas
         viewModel.getPerguntas().observe(this, perguntas -> {
             if (perguntas != null && !perguntas.isEmpty()) {
                 viewModel.embaralharPerguntas();
@@ -83,34 +89,46 @@ public class PerguntasActivity extends AppCompatActivity {
             if (respostaSelecionada == posicaoCorreta) {
                 // Resposta correta
                 binding.tvFeedback.setText("Resposta correta!");
-                binding.tvFeedback.setTextColor(getResources().getColor(R.color.green)); // Define a cor do texto para verde
+                binding.tvFeedback.setTextColor(getResources().getColor(R.color.green));
                 binding.tvFeedback.setVisibility(View.VISIBLE);
 
-                // Adicionar pontos e atualizar a interface
+                // Incrementar pontuação e respostas corretas consecutivas
                 viewModel.adicionarPontos(10);
+                respostasCorretasConsecutivas++;
                 atualizarPontuacao();
 
-                // Aguardar um pequeno atraso antes de avançar para a próxima pergunta
-                binding.btnConfirmarResposta.postDelayed(() -> {
-                    viewModel.avancarPergunta();
-                    exibirPergunta(viewModel.getPerguntaAtual());
-                }, 1000); // 1 segundo de atraso
+                // Verificar se atingiu múltiplo de 5 respostas corretas consecutivas
+                if (respostasCorretasConsecutivas % 5 == 0) {
+                    nivelAtual++;
+                    viewModel.atualizarPerguntasNivel(nivelAtual);  // Atualiza perguntas para o novo nível
+                    mostrarSplashScreen();
+                } else {
+                    // Avançar para a próxima pergunta com atraso
+                    binding.btnConfirmarResposta.postDelayed(() -> {
+                        viewModel.avancarPergunta();
+                        exibirPergunta(viewModel.getPerguntaAtual());
+                    }, 1000);
+                }
             } else {
                 // Resposta incorreta
+                respostasCorretasConsecutivas = 0; // Resetar contador de respostas corretas consecutivas
                 erros++;
+
                 if (erros > errosPermitidos) {
-                    // Redirecionar para a tela de GameOver com a pontuação
+                    // Redirecionar para tela de Game Over
                     Intent intent = new Intent(PerguntasActivity.this, GameOverActivity.class);
                     intent.putExtra("PONTUACAO", viewModel.getPontuacao());
                     startActivity(intent);
                     finish();
                 } else {
+                    // Exibir feedback de erro
                     binding.tvFeedback.setText("Resposta incorreta. Tente novamente.");
-                    binding.tvFeedback.setTextColor(getResources().getColor(R.color.red)); // Define a cor do texto para vermelho
+                    binding.tvFeedback.setTextColor(getResources().getColor(R.color.red));
                     binding.tvFeedback.setVisibility(View.VISIBLE);
                 }
             }
         } else {
+            // Caso não existam mais perguntas
             Toast.makeText(this, "Fim do quiz!", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(PerguntasActivity.this, GameOverActivity.class);
             intent.putExtra("PONTUACAO", viewModel.getPontuacao());
@@ -122,5 +140,11 @@ public class PerguntasActivity extends AppCompatActivity {
     private void atualizarPontuacao() {
         // Atualiza o TextView da pontuação com o valor atual
         binding.tvPontuacao.setText("Pontos: " + viewModel.getPontuacao());
+    }
+
+    private void mostrarSplashScreen() {
+        Intent intent = new Intent(this, SplashScreenActivity.class);
+        intent.putExtra("NIVEL", nivelAtual); // Passar o nível atual
+        startActivity(intent);
     }
 }

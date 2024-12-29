@@ -2,6 +2,8 @@ package rafaelmarcal.ifsp.edu.quizaedes.ui.perguntas;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import rafaelmarcal.ifsp.edu.quizaedes.data.model.Pergunta;
@@ -12,6 +14,7 @@ public class PerguntasViewModel extends ViewModel {
     private final MutableLiveData<List<Pergunta>> perguntasLiveData;
     private int perguntaAtualIndex = 0;
     private int pontuacao = 0;
+    private final List<Pergunta> perguntasRespondidas = new ArrayList<>(); // Para evitar repetição
 
     public PerguntasViewModel() {
         repository = new PerguntasRepository();
@@ -28,20 +31,20 @@ public class PerguntasViewModel extends ViewModel {
         }
     }
 
-
     public Pergunta getPerguntaAtual() {
         List<Pergunta> perguntas = perguntasLiveData.getValue();
         if (perguntas != null && !perguntas.isEmpty()) {
-            Pergunta perguntaAtual = perguntas.get(perguntaAtualIndex);
-            perguntaAtual.embaralharOpcoes(); // Embaralhar as opções da pergunta atual
-            return perguntaAtual;
+            return perguntas.get(perguntaAtualIndex);
         }
         return null;
     }
 
     public void avancarPergunta() {
-        if (perguntasLiveData.getValue() != null && perguntaAtualIndex < perguntasLiveData.getValue().size() - 1) {
+        if (perguntasLiveData.getValue() != null) {
             perguntaAtualIndex++;
+            if (perguntaAtualIndex >= perguntasLiveData.getValue().size()) {
+                perguntaAtualIndex = 0; // Reinicia a lista se acabar
+            }
         }
     }
 
@@ -53,11 +56,22 @@ public class PerguntasViewModel extends ViewModel {
         return pontuacao;
     }
 
-    public void resetarPontuacao() {
-        pontuacao = 0;
+    public void registrarPerguntaRespondida(Pergunta pergunta) {
+        perguntasRespondidas.add(pergunta);
     }
 
-    public void reiniciarQuiz() {
-        perguntaAtualIndex = 0;
+    public void atualizarPerguntasNivel(int nivel) {
+        List<Pergunta> todasPerguntas = repository.getPerguntas().getValue();
+        if (todasPerguntas != null) {
+            List<Pergunta> perguntasNivelAtual = new ArrayList<>();
+            for (Pergunta pergunta : todasPerguntas) {
+                if (!perguntasRespondidas.contains(pergunta)) {
+                    perguntasNivelAtual.add(pergunta);
+                }
+                if (perguntasNivelAtual.size() == 5) break; // Seleciona 5 perguntas
+            }
+            perguntasLiveData.setValue(perguntasNivelAtual);
+            perguntaAtualIndex = 0; // Reiniciar índice para o novo nível
+        }
     }
     }
