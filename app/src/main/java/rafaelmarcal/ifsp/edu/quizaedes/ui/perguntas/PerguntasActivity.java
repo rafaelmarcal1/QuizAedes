@@ -47,7 +47,6 @@ public class PerguntasActivity extends AppCompatActivity {
 
     private void exibirPergunta(Pergunta pergunta) {
         if (pergunta != null) {
-            // Exibir o texto da pergunta
             binding.tvPergunta.setText(pergunta.getTextoPergunta());
 
             // Criar uma lista temporária das opções e embaralhá-la
@@ -57,11 +56,11 @@ public class PerguntasActivity extends AppCompatActivity {
             // Identificar a nova posição da resposta correta
             int novaPosicaoCorreta = opcoesEmbaralhadas.indexOf(pergunta.getOpcoes().get(pergunta.getRespostaCorreta()));
 
-            // Configurar o texto das opções no RadioGroup
-            binding.rbOpcaoA.setText(opcoesEmbaralhadas.get(0));
-            binding.rbOpcaoB.setText(opcoesEmbaralhadas.get(1));
-            binding.rbOpcaoC.setText(opcoesEmbaralhadas.get(2));
-            binding.rbOpcaoD.setText(opcoesEmbaralhadas.get(3));
+            // Configurar o texto das opções no RadioGroup com letras
+            binding.rbOpcaoA.setText("A) " + opcoesEmbaralhadas.get(0));
+            binding.rbOpcaoB.setText("B) " + opcoesEmbaralhadas.get(1));
+            binding.rbOpcaoC.setText("C) " + opcoesEmbaralhadas.get(2));
+            binding.rbOpcaoD.setText("D) " + opcoesEmbaralhadas.get(3));
 
             // Salvar a nova posição correta na tag do RadioGroup
             binding.rgOpcoes.setTag(novaPosicaoCorreta);
