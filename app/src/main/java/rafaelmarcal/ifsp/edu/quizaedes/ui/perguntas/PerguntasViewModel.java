@@ -60,6 +60,10 @@ public class PerguntasViewModel extends ViewModel {
         perguntasRespondidas.add(pergunta);
     }
 
+    public void setPontuacao(int pontuacao) {
+        this.pontuacao = pontuacao;
+    }
+
     public void atualizarPerguntasNivel(int nivel) {
         List<Pergunta> todasPerguntas = repository.getPerguntas().getValue();
         if (todasPerguntas != null) {

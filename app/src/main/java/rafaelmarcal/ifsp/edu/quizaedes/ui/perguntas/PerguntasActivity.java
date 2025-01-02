@@ -35,6 +35,12 @@ public class PerguntasActivity extends AppCompatActivity {
 
         viewModel = new ViewModelProvider(this).get(PerguntasViewModel.class);
 
+        // Recuperando a pontuação passada pela SplashScreen
+        if (getIntent() != null) {
+            int pontuacaoRecuperada = getIntent().getIntExtra("PONTUACAO", 0);
+            viewModel.setPontuacao(pontuacaoRecuperada); // Atualiza a pontuação
+        }
+
         // Observando as perguntas
         viewModel.getPerguntas().observe(this, perguntas -> {
             if (perguntas != null && !perguntas.isEmpty()) {
@@ -145,6 +151,7 @@ public class PerguntasActivity extends AppCompatActivity {
     private void mostrarSplashScreen() {
         Intent intent = new Intent(this, SplashScreenActivity.class);
         intent.putExtra("NIVEL", nivelAtual); // Passar o nível atual
+        intent.putExtra("PONTUACAO", viewModel.getPontuacao()); // Passar a pontuação também
         startActivity(intent);
     }
 }

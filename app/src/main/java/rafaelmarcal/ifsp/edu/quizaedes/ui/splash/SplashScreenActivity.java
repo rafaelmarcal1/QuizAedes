@@ -12,26 +12,43 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import rafaelmarcal.ifsp.edu.quizaedes.R;
+import rafaelmarcal.ifsp.edu.quizaedes.databinding.ActivitySplashScreenBinding;
 import rafaelmarcal.ifsp.edu.quizaedes.ui.perguntas.PerguntasActivity;
 
 public class SplashScreenActivity extends AppCompatActivity {
 
+    private static final int TEMPO_SPLASH = 2000; // Tempo de exibição da splash screen (2 segundos)
+    private ActivitySplashScreenBinding binding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash_screen);
 
-        int nivel = getIntent().getIntExtra("NIVEL", 1);
+        // Inflando o layout com ViewBinding
+        binding = ActivitySplashScreenBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        // Mostrar o nível no layout (adapte conforme necessário)
-        TextView tvNivel = findViewById(R.id.tvNivel);
-        tvNivel.setText("Nível " + nivel + "!");
+        // Recuperando o nível e a pontuação passados pela PerguntasActivity
+        int nivelAtual = getIntent().getIntExtra("NIVEL", 1); // Padrão para o nível 1
+        int pontuacao = getIntent().getIntExtra("PONTUACAO", 0); // Padrão para 0 pontos
 
-        // Retornar para PerguntasActivity após 3 segundos
+        // Exibir o nível na Splash Screen
+        binding.tvNivel.setText("Nível: " + nivelAtual);
+
+        // Usando Handler para esperar o tempo da splash screen antes de continuar
         new Handler().postDelayed(() -> {
+            // Após o tempo da splash screen, iniciar a PerguntasActivity passando o nível e a pontuação
             Intent intent = new Intent(SplashScreenActivity.this, PerguntasActivity.class);
+            intent.putExtra("NIVEL", nivelAtual); // Passar o nível atual
+            intent.putExtra("PONTUACAO", getIntent().getIntExtra("PONTUACAO", 0)); // Recupera a pontuação
             startActivity(intent);
-            finish(); // Fechar SplashScreen
-        }, 3000); // 3 segundos
+            finish(); // Finaliza a SplashScreenActivity para não voltar a ela
+        }, TEMPO_SPLASH);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        binding = null; // Garantir que o binding seja limpo quando a Activity for destruída
     }
 }
