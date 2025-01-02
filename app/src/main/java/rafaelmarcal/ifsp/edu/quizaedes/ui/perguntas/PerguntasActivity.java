@@ -61,6 +61,7 @@ public class PerguntasActivity extends AppCompatActivity {
 
         // Atualizar a pontuação inicial na interface
         atualizarPontuacao();
+        atualizarNivel(); // Atualiza o nível no início
     }
 
     private void exibirPergunta(Pergunta pergunta) {
@@ -100,21 +101,18 @@ public class PerguntasActivity extends AppCompatActivity {
 
             if (respostaSelecionada == posicaoCorreta) {
                 // Resposta correta
+                viewModel.adicionarPontos(10); // Adiciona pontos pela resposta correta
+                viewModel.incrementarNivel(); // Incrementa o nível a cada 2 respostas corretas
                 binding.tvFeedback.setText("Resposta correta!");
                 binding.tvFeedback.setTextColor(getResources().getColor(R.color.green));
                 binding.tvFeedback.setVisibility(View.VISIBLE);
-
-                // Incrementar pontuação
-                viewModel.adicionarPontos(10);
-                atualizarPontuacao();
             } else {
-                // Resposta incorreta
+                // Resposta errada
                 erros++;
-                if (erros > errosPermitidos) {
-                    // Redireciona para a tela de Game Over se exceder o número de erros
+                if (erros >= errosPermitidos) {
+                    // Se o número de erros atingir o limite
                     mostrarTelaGameOver();
                 } else {
-                    // Exibir feedback de erro
                     binding.tvFeedback.setText("Resposta incorreta. Tente novamente.");
                     binding.tvFeedback.setTextColor(getResources().getColor(R.color.red));
                     binding.tvFeedback.setVisibility(View.VISIBLE);
@@ -127,6 +125,10 @@ public class PerguntasActivity extends AppCompatActivity {
             // Avançar para a próxima pergunta
             viewModel.avancarPergunta();
             exibirPergunta(viewModel.getPerguntaAtual());
+
+            // Atualizar a pontuação e o nível
+            atualizarPontuacao();
+            atualizarNivel();
         }
     }
 
@@ -135,8 +137,12 @@ public class PerguntasActivity extends AppCompatActivity {
         binding.tvPontuacao.setText("Pontos: " + viewModel.getPontuacao());
     }
 
+    private void atualizarNivel() {
+        // Atualiza o TextView do nível com o valor atual
+        binding.tvNivel.setText("Nível: " + viewModel.getNivel());
+    }
+
     private void mostrarTelaGameOver() {
-        // Chama a tela de Game Over com a pontuação
         Intent intent = new Intent(PerguntasActivity.this, GameOverActivity.class);
         intent.putExtra("PONTUACAO", viewModel.getPontuacao());
         startActivity(intent);

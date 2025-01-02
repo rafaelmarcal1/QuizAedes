@@ -19,6 +19,8 @@ public class PerguntasViewModel extends ViewModel {
     private int perguntaAtualIndex = 0;
     private int pontuacao = 0;
     private final List<Pergunta> perguntasRespondidas = new ArrayList<>(); // Para evitar repetição
+    private int respostasCorretas = 0; // Contador de respostas corretas
+    private int nivel = 1; // Nível inicial
 
     public PerguntasViewModel() {
         repository = new PerguntasRepository();
@@ -33,17 +35,10 @@ public class PerguntasViewModel extends ViewModel {
         return quizTerminadoLiveData;
     }
 
-    public void embaralharPerguntas() {
-        if (perguntasLiveData.getValue() != null) {
-            Collections.shuffle(perguntasLiveData.getValue());
-        }
-    }
-
     // Avançar para a próxima pergunta
     public void avancarPergunta() {
         List<Pergunta> perguntas = perguntasLiveData.getValue();
         if (perguntas != null && !perguntas.isEmpty()) {
-            // Incrementa o índice da pergunta
             perguntaAtualIndex++;
             if (perguntaAtualIndex >= perguntas.size()) {
                 // Quando todas as perguntas forem respondidas, finaliza o quiz
@@ -76,6 +71,20 @@ public class PerguntasViewModel extends ViewModel {
         pontuacao += pontos;
     }
 
+    public void embaralharPerguntas() {
+        if (perguntasLiveData.getValue() != null) {
+            Collections.shuffle(perguntasLiveData.getValue());
+        }
+    }
+
+    // Incrementar o nível
+    public void incrementarNivel() {
+        respostasCorretas++;
+        if (respostasCorretas % 2 == 0) { // A cada 2 respostas corretas
+            nivel++;
+        }
+    }
+
     // Getters e setters para pontuação
     public int getPontuacao() {
         return pontuacao;
@@ -85,6 +94,10 @@ public class PerguntasViewModel extends ViewModel {
         this.pontuacao = pontuacao;
     }
 
+    public int getNivel() {
+        return nivel;
+    }
+
     // Registrar perguntas respondidas para evitar repetir
     public void registrarPerguntaRespondida(Pergunta pergunta) {
         perguntasRespondidas.add(pergunta);
@@ -92,9 +105,10 @@ public class PerguntasViewModel extends ViewModel {
 
     // Resetar o quiz
     public void reiniciarQuiz() {
-        // Reinicia o índice da pergunta e a lista de perguntas respondidas
         perguntaAtualIndex = 0;
         perguntasRespondidas.clear();
         quizTerminadoLiveData.setValue(false);
+        respostasCorretas = 0;
+        nivel = 1; // Resetar o nível
     }
 }
