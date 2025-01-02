@@ -1,5 +1,4 @@
 package rafaelmarcal.ifsp.edu.quizaedes.ui.perguntas;
-import android.content.Intent;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -10,7 +9,6 @@ import java.util.Collections;
 import java.util.List;
 import rafaelmarcal.ifsp.edu.quizaedes.data.model.Pergunta;
 import rafaelmarcal.ifsp.edu.quizaedes.data.repository.PerguntasRepository;
-import rafaelmarcal.ifsp.edu.quizaedes.ui.gameover.GameOverActivity;
 
 public class PerguntasViewModel extends ViewModel {
     private final PerguntasRepository repository;
@@ -69,6 +67,9 @@ public class PerguntasViewModel extends ViewModel {
     // Adicionar pontos ao usuário
     public void adicionarPontos(int pontos) {
         pontuacao += pontos;
+        if (pontuacao < 0) {
+            pontuacao = 0; // Evitar que a pontuação seja negativa
+        }
     }
 
     public void embaralharPerguntas() {

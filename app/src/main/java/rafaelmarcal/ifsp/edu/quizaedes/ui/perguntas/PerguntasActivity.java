@@ -12,11 +12,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import rafaelmarcal.ifsp.edu.quizaedes.R;
 import rafaelmarcal.ifsp.edu.quizaedes.data.model.Pergunta;
 import rafaelmarcal.ifsp.edu.quizaedes.databinding.ActivityPerguntasBinding;
 import rafaelmarcal.ifsp.edu.quizaedes.ui.gameover.GameOverActivity;
-import rafaelmarcal.ifsp.edu.quizaedes.ui.splash.SplashScreenActivity;
 import rafaelmarcal.ifsp.edu.quizaedes.ui.splash.VitoriaActivity;
 
 public class PerguntasActivity extends AppCompatActivity {
@@ -93,7 +91,6 @@ public class PerguntasActivity extends AppCompatActivity {
             binding.rgOpcoes.setTag(novaPosicaoCorreta);
 
             // Resetar o RadioGroup para que nenhuma opção esteja selecionada
-            binding.tvFeedback.setVisibility(View.GONE);
             binding.rgOpcoes.clearCheck();
         }
     }
@@ -111,23 +108,21 @@ public class PerguntasActivity extends AppCompatActivity {
                 // Resposta correta
                 viewModel.adicionarPontos(10); // Adiciona pontos pela resposta correta
                 viewModel.incrementarNivel(); // Incrementa o nível a cada 2 respostas corretas
-                binding.tvFeedback.setText("Resposta correta!");
-                binding.tvFeedback.setTextColor(getResources().getColor(R.color.green));
-                binding.tvFeedback.setVisibility(View.VISIBLE);
-
-                // Verifica se o usuário alcançou 9 respostas corretas
                 viewModel.verificarVitoria();
+                mostrarFeedback("Resposta correta!", true); // Exibe feedback de resposta correta
             } else {
                 // Resposta errada
                 erros++;
+
+                if (viewModel.getPontuacao() > 0) {
+                    viewModel.adicionarPontos(-5); // Subtrai 5 pontos pela resposta errada
+                }
+
                 if (erros >= errosPermitidos) {
                     // Se o número de erros atingir o limite
                     mostrarTelaGameOver();
-                } else {
-                    binding.tvFeedback.setText("Resposta incorreta. Tente novamente.");
-                    binding.tvFeedback.setTextColor(getResources().getColor(R.color.red));
-                    binding.tvFeedback.setVisibility(View.VISIBLE);
                 }
+                mostrarFeedback("Resposta incorreta!", false); // Exibe feedback de resposta incorreta
             }
 
             // Registrar a pergunta respondida
@@ -141,6 +136,29 @@ public class PerguntasActivity extends AppCompatActivity {
             atualizarPontuacao();
             atualizarNivel();
         }
+    }
+
+    private void mostrarFeedback(String mensagem, boolean isCorreta) {
+        // Atualiza o texto do Feedback com a mensagem correta
+        binding.tvFeedback.setText(mensagem);
+
+        // Altera a cor de acordo com a resposta (verde para correta, vermelho para incorreta)
+        if (isCorreta) {
+            binding.tvFeedback.setTextColor(getResources().getColor(android.R.color.holo_green_dark));
+        } else {
+            binding.tvFeedback.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
+        }
+
+        // Torna o Feedback visível
+        binding.tvFeedback.setVisibility(View.VISIBLE);
+
+        // Esconde o feedback após um breve período (2 segundos, por exemplo)
+        binding.tvFeedback.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                binding.tvFeedback.setVisibility(View.GONE); // Esconde o Feedback
+            }
+        }, 2000); // 2 segundos de exibição
     }
 
     private void atualizarPontuacao() {
