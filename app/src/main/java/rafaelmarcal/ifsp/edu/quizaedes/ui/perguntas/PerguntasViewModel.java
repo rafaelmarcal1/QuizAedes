@@ -77,6 +77,12 @@ public class PerguntasViewModel extends ViewModel {
         }
     }
 
+    public void verificarVitoria() {
+        if (respostasCorretas >= 9) {
+            quizTerminadoLiveData.setValue(true);  // Finaliza o quiz
+        }
+    }
+
     // Incrementar o nível
     public void incrementarNivel() {
         respostasCorretas++;

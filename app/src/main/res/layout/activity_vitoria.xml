@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/tvMensagemVitoria"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Parabéns! Você venceu!"
+        android:textSize="24sp"
+        android:textColor="@android:color/holo_green_dark"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:id="@+id/tvPontuacao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sua pontuação: 0"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        android:layout_marginBottom="32dp"/>
+
+    <Button
+        android:id="@+id/btnReiniciarQuiz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reiniciar Quiz"
+        android:textColor="@android:color/white"
+        android:background="@color/green" />
+
+</LinearLayout>

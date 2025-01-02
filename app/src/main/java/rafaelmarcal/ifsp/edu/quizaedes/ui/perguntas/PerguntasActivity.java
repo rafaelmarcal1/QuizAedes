@@ -17,6 +17,7 @@ import rafaelmarcal.ifsp.edu.quizaedes.data.model.Pergunta;
 import rafaelmarcal.ifsp.edu.quizaedes.databinding.ActivityPerguntasBinding;
 import rafaelmarcal.ifsp.edu.quizaedes.ui.gameover.GameOverActivity;
 import rafaelmarcal.ifsp.edu.quizaedes.ui.splash.SplashScreenActivity;
+import rafaelmarcal.ifsp.edu.quizaedes.ui.splash.VitoriaActivity;
 
 public class PerguntasActivity extends AppCompatActivity {
 
@@ -52,8 +53,8 @@ public class PerguntasActivity extends AppCompatActivity {
         // Observando o estado de "quiz terminado"
         viewModel.getQuizTerminado().observe(this, quizTerminado -> {
             if (quizTerminado != null && quizTerminado) {
-                // O quiz acabou, redireciona para a tela de Game Over
-                mostrarTelaGameOver();
+                // O quiz acabou, redireciona para a tela de vitória
+                mostrarTelaVitoria();
             }
         });
 
@@ -62,6 +63,13 @@ public class PerguntasActivity extends AppCompatActivity {
         // Atualizar a pontuação inicial na interface
         atualizarPontuacao();
         atualizarNivel(); // Atualiza o nível no início
+    }
+
+    private void mostrarTelaVitoria() {
+        Intent intent = new Intent(PerguntasActivity.this, VitoriaActivity.class);
+        intent.putExtra("PONTUACAO", viewModel.getPontuacao());
+        startActivity(intent);
+        finish();
     }
 
     private void exibirPergunta(Pergunta pergunta) {
@@ -106,6 +114,9 @@ public class PerguntasActivity extends AppCompatActivity {
                 binding.tvFeedback.setText("Resposta correta!");
                 binding.tvFeedback.setTextColor(getResources().getColor(R.color.green));
                 binding.tvFeedback.setVisibility(View.VISIBLE);
+
+                // Verifica se o usuário alcançou 9 respostas corretas
+                viewModel.verificarVitoria();
             } else {
                 // Resposta errada
                 erros++;
