@@ -24,8 +24,6 @@ public class PerguntasActivity extends AppCompatActivity {
     private PerguntasViewModel viewModel;
     private int errosPermitidos = 2;
     private int erros = 0;
-    private int nivelAtual = 1;
-    private int respostasCorretasConsecutivas = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +46,14 @@ public class PerguntasActivity extends AppCompatActivity {
                 exibirPergunta(viewModel.getPerguntaAtual());
             } else {
                 Toast.makeText(this, "Erro ao carregar perguntas.", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        // Observando o estado de "quiz terminado"
+        viewModel.getQuizTerminado().observe(this, quizTerminado -> {
+            if (quizTerminado != null && quizTerminado) {
+                // O quiz acabou, redireciona para a tela de Game Over
+                mostrarTelaGameOver();
             }
         });
 
@@ -98,34 +104,15 @@ public class PerguntasActivity extends AppCompatActivity {
                 binding.tvFeedback.setTextColor(getResources().getColor(R.color.green));
                 binding.tvFeedback.setVisibility(View.VISIBLE);
 
-                // Incrementar pontuação e respostas corretas consecutivas
+                // Incrementar pontuação
                 viewModel.adicionarPontos(10);
-                respostasCorretasConsecutivas++;
                 atualizarPontuacao();
-
-                // Verificar se atingiu múltiplo de 5 respostas corretas consecutivas
-                if (respostasCorretasConsecutivas % 5 == 0) {
-                    nivelAtual++;
-                    viewModel.atualizarPerguntasNivel(nivelAtual);  // Atualiza perguntas para o novo nível
-                    mostrarSplashScreen();
-                } else {
-                    // Avançar para a próxima pergunta com atraso
-                    binding.btnConfirmarResposta.postDelayed(() -> {
-                        viewModel.avancarPergunta();
-                        exibirPergunta(viewModel.getPerguntaAtual());
-                    }, 1000);
-                }
             } else {
                 // Resposta incorreta
-                respostasCorretasConsecutivas = 0; // Resetar contador de respostas corretas consecutivas
                 erros++;
-
                 if (erros > errosPermitidos) {
-                    // Redirecionar para tela de Game Over
-                    Intent intent = new Intent(PerguntasActivity.this, GameOverActivity.class);
-                    intent.putExtra("PONTUACAO", viewModel.getPontuacao());
-                    startActivity(intent);
-                    finish();
+                    // Redireciona para a tela de Game Over se exceder o número de erros
+                    mostrarTelaGameOver();
                 } else {
                     // Exibir feedback de erro
                     binding.tvFeedback.setText("Resposta incorreta. Tente novamente.");
@@ -133,13 +120,13 @@ public class PerguntasActivity extends AppCompatActivity {
                     binding.tvFeedback.setVisibility(View.VISIBLE);
                 }
             }
-        } else {
-            // Caso não existam mais perguntas
-            Toast.makeText(this, "Fim do quiz!", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(PerguntasActivity.this, GameOverActivity.class);
-            intent.putExtra("PONTUACAO", viewModel.getPontuacao());
-            startActivity(intent);
-            finish();
+
+            // Registrar a pergunta respondida
+            viewModel.registrarPerguntaRespondida(perguntaAtual);
+
+            // Avançar para a próxima pergunta
+            viewModel.avancarPergunta();
+            exibirPergunta(viewModel.getPerguntaAtual());
         }
     }
 
@@ -148,10 +135,11 @@ public class PerguntasActivity extends AppCompatActivity {
         binding.tvPontuacao.setText("Pontos: " + viewModel.getPontuacao());
     }
 
-    private void mostrarSplashScreen() {
-        Intent intent = new Intent(this, SplashScreenActivity.class);
-        intent.putExtra("NIVEL", nivelAtual); // Passar o nível atual
-        intent.putExtra("PONTUACAO", viewModel.getPontuacao()); // Passar a pontuação também
+    private void mostrarTelaGameOver() {
+        // Chama a tela de Game Over com a pontuação
+        Intent intent = new Intent(PerguntasActivity.this, GameOverActivity.class);
+        intent.putExtra("PONTUACAO", viewModel.getPontuacao());
         startActivity(intent);
+        finish();
     }
 }
