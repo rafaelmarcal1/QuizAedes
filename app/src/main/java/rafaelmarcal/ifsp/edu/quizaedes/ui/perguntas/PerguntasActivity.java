@@ -56,11 +56,24 @@ public class PerguntasActivity extends AppCompatActivity {
             }
         });
 
+        // Observando o LiveData do nível para mostrar a mensagem quando o nível for alterado
+        viewModel.getNivelLiveData().observe(this, nivel -> {
+            if (nivel != null) {
+                // Exibir a mensagem informando que o nível foi alterado
+                mostrarMensagemNivel(nivel);
+            }
+        });
+
         binding.btnConfirmarResposta.setOnClickListener(v -> conferirResposta());
 
         // Atualizar a pontuação inicial na interface
         atualizarPontuacao();
         atualizarNivel(); // Atualiza o nível no início
+    }
+
+    private void mostrarMensagemNivel(int nivel) {
+        String mensagem = "Parabéns! Você atingiu o Nível " + nivel + "!";
+        Toast.makeText(this, mensagem, Toast.LENGTH_SHORT).show();
     }
 
     private void mostrarTelaVitoria() {

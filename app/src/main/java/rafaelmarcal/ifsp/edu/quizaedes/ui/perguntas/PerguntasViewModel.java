@@ -19,6 +19,7 @@ public class PerguntasViewModel extends ViewModel {
     private final List<Pergunta> perguntasRespondidas = new ArrayList<>(); // Para evitar repetição
     private int respostasCorretas = 0; // Contador de respostas corretas
     private int nivel = 1; // Nível inicial
+    private final MutableLiveData<Integer> nivelLiveData = new MutableLiveData<>();
 
     public PerguntasViewModel() {
         repository = new PerguntasRepository();
@@ -31,6 +32,10 @@ public class PerguntasViewModel extends ViewModel {
 
     public LiveData<Boolean> getQuizTerminado() {
         return quizTerminadoLiveData;
+    }
+
+    public LiveData<Integer> getNivelLiveData() {
+        return nivelLiveData;
     }
 
     // Avançar para a próxima pergunta
@@ -87,8 +92,9 @@ public class PerguntasViewModel extends ViewModel {
     // Incrementar o nível
     public void incrementarNivel() {
         respostasCorretas++;
-        if (respostasCorretas % 2 == 0) { // A cada 2 respostas corretas
+        if (respostasCorretas % 3 == 0) { // A cada 3 respostas corretas
             nivel++;
+            nivelLiveData.setValue(nivel); // Notificar a alteração do nível
         }
     }
 
