@@ -51,7 +51,28 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="24dp" />
 
+
     <!-- Opções de resposta -->
+
+    <TextView
+        android:id="@+id/tvNumeroPergunta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:letterSpacing="0.05"
+        android:padding="-6dp"
+        android:text="Esta é a pergunta 1"
+        android:textColor="#2196F3"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvNivel" />
+
     <RadioGroup
         android:id="@+id/rgOpcoes"
         android:layout_width="0dp"

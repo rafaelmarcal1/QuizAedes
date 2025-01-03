@@ -85,6 +85,11 @@ public class PerguntasActivity extends AppCompatActivity {
 
     private void exibirPergunta(Pergunta pergunta) {
         if (pergunta != null) {
+            // Atualiza o número da pergunta
+            int numeroPergunta = viewModel.getNumeroPerguntaAtual(); // Obtém o número da pergunta
+            binding.tvNumeroPergunta.setText("PERGUNTA " + numeroPergunta); // Atualiza o texto do TextView
+
+            // Exibe o texto da pergunta
             binding.tvPergunta.setText(pergunta.getTextoPergunta());
 
             // Criar uma lista temporária das opções e embaralhá-la

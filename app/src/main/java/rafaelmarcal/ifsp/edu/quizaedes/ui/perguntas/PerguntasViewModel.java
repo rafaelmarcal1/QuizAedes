@@ -38,6 +38,10 @@ public class PerguntasViewModel extends ViewModel {
         return nivelLiveData;
     }
 
+    public int getNumeroPerguntaAtual() {
+        return perguntaAtualIndex + 1; // Como o índice começa de 0, somamos 1 para exibir "Pergunta 1", "Pergunta 2", etc.
+    }
+
     // Avançar para a próxima pergunta
     public void avancarPergunta() {
         List<Pergunta> perguntas = perguntasLiveData.getValue();
