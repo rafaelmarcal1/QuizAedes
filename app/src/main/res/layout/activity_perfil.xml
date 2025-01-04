@@ -44,7 +44,7 @@
         android:id="@+id/tvPontos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Pontos: 0"
+        android:text="Total de Pontos: 0"
         app:layout_constraintTop_toBottomOf="@id/tvNivel"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="8dp" />
@@ -59,45 +59,7 @@
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="8dp" />
 
-    <!-- Total de Vitórias -->
-    <TextView
-        android:id="@+id/tvVitorias"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Total de Vitórias: 0"
-        app:layout_constraintTop_toBottomOf="@id/tvConquistas"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="8dp" />
 
-    <!-- Total de Derrotas -->
-    <TextView
-        android:id="@+id/tvDerrotas"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Total de Derrotas: 0"
-        app:layout_constraintTop_toBottomOf="@id/tvVitorias"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="8dp" />
-
-    <!-- Melhor Recorde Pessoal -->
-    <TextView
-        android:id="@+id/tvRecordePessoal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Melhor Recorde: 0"
-        app:layout_constraintTop_toBottomOf="@id/tvDerrotas"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="8dp" />
-
-    <!-- Percentual de Vitórias -->
-    <TextView
-        android:id="@+id/tvPercentualVitorias"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Aproveitamento: 0%"
-        app:layout_constraintTop_toBottomOf="@id/tvRecordePessoal"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="8dp" />
 
     <!-- Botão para editar perfil -->
     <Button
@@ -105,7 +67,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/editar_perfil"
-        app:layout_constraintTop_toBottomOf="@id/tvPercentualVitorias"
+        app:layout_constraintTop_toBottomOf="@id/tvConquistas"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp" />

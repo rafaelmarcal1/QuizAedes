@@ -27,13 +27,6 @@ public class PerfilActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil);
 
-        // Recupera o maior nível já alcançado usando SharedPreferences
-        SharedPreferences sharedPreferences = getSharedPreferences("perfil", MODE_PRIVATE);
-        int maiorNivel = sharedPreferences.getInt("maior_nivel", 0);  // 0 é o valor padrão caso não tenha um valor salvo
-
-        // Exibe o maior nível no TextView usando o binding
-        binding.tvNivel.setText("Maior Nível já alcançado numa partida: " + maiorNivel);
-
         // Inicializar o FirebaseAuth
         mAuth = FirebaseAuth.getInstance();
 
