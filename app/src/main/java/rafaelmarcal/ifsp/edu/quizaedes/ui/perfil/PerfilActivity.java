@@ -1,6 +1,5 @@
 package rafaelmarcal.ifsp.edu.quizaedes.ui.perfil;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.TextView;
 

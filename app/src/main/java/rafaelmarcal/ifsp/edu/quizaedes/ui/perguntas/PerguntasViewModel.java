@@ -15,9 +15,11 @@ public class PerguntasViewModel extends ViewModel {
     private final MutableLiveData<Boolean> quizTerminadoLiveData = new MutableLiveData<>(false);
     private int perguntaAtualIndex = 0;
     private int pontuacao = 0;
+    private int moedas = 0; // Saldo inicial de moedas
     private final List<Pergunta> perguntasRespondidas = new ArrayList<>(); // Para evitar repetição
     private int respostasCorretas = 0; // Contador de respostas corretas
     private int nivel = 1; // Nível inicial
+    private final MutableLiveData<Integer> moedasLiveData = new MutableLiveData<>(moedas); // LiveData para moedas
     private final MutableLiveData<Integer> nivelLiveData = new MutableLiveData<>();
 
     public PerguntasViewModel() {
@@ -35,6 +37,26 @@ public class PerguntasViewModel extends ViewModel {
 
     public LiveData<Integer> getNivelLiveData() {
         return nivelLiveData;
+    }
+
+    // Método para adicionar moedas
+    public void adicionarMoedas(int quantidade) {
+        moedas += quantidade;
+        if (moedas < 0) {
+            moedas = 0; // Garantir que as moedas não fiquem negativas
+        }
+        moedasLiveData.setValue(moedas);
+    }
+
+    // Getter para LiveData de moedas
+    public LiveData<Integer> getMoedasLiveData() {
+        return moedasLiveData;
+    }
+
+
+    // Método para obter o saldo atual de moedas
+    public int getMoedas() {
+        return moedas;
     }
 
     public int getNumeroPerguntaAtual() {
@@ -130,6 +152,7 @@ public class PerguntasViewModel extends ViewModel {
         quizTerminadoLiveData.setValue(false);
         respostasCorretas = 0;
         nivel = 1; // Resetar o nível
+        moedas = 0; // Resetar o saldo de moedas
     }
 
 }

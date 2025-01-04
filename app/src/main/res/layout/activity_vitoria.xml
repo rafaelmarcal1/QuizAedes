@@ -24,6 +24,16 @@
         android:textColor="@android:color/black"
         android:layout_marginBottom="32dp"/>
 
+    <!-- Moedas -->
+    <TextView
+        android:id="@+id/tvMoedasVitoria"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Moedas: 0"
+        android:textSize="18sp"
+        android:textColor="#FFD700"
+        android:layout_marginBottom="32dp"/>
+
     <Button
         android:id="@+id/btnReiniciarQuiz"
         android:layout_width="wrap_content"

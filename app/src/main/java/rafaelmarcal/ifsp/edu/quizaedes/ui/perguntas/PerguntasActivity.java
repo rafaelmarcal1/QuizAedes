@@ -35,6 +35,11 @@ public class PerguntasActivity extends AppCompatActivity {
             viewModel.setPontuacao(pontuacaoRecuperada); // Atualiza a pontuação
         }
 
+        // Observando as moedas para atualizar a interface
+        viewModel.getMoedasLiveData().observe(this, moedas -> {
+            binding.tvMoedas.setText("Moedas: " + moedas);
+        });
+
         // Observando as perguntas
         viewModel.getPerguntas().observe(this, perguntas -> {
             if (perguntas != null && !perguntas.isEmpty()) {
@@ -113,47 +118,43 @@ public class PerguntasActivity extends AppCompatActivity {
     private void conferirResposta() {
         Pergunta perguntaAtual = viewModel.getPerguntaAtual();
         if (perguntaAtual != null) {
-            // Obter a posição da resposta correta armazenada no RadioGroup
             int posicaoCorreta = (int) binding.rgOpcoes.getTag();
-
-            // Obter a posição selecionada pelo usuário
             int respostaSelecionada = binding.rgOpcoes.indexOfChild(findViewById(binding.rgOpcoes.getCheckedRadioButtonId()));
 
             if (respostaSelecionada == posicaoCorreta) {
                 // Resposta correta
-                viewModel.adicionarPontos(10); // Adiciona pontos pela resposta correta
-                viewModel.incrementarNivel(); // Incrementa o nível a cada 3 respostas corretas
+                viewModel.adicionarPontos(10); // Adiciona pontos
+                viewModel.adicionarMoedas(10); // Adiciona moedas
+                viewModel.incrementarNivel(); // Incrementa o nível
                 viewModel.verificarVitoria();
-                mostrarFeedback("Resposta correta!", true); // Exibe feedback de resposta correta
+                mostrarFeedback("Resposta correta!", true);
             } else {
                 // Resposta errada
                 erros++;
-
+                viewModel.adicionarMoedas(-3); // Subtrai moedas pela resposta errada
                 if (viewModel.getPontuacao() > 0) {
-                    viewModel.adicionarPontos(-5); // Subtrai 5 pontos pela resposta errada
+                    viewModel.adicionarPontos(-5); // Subtrai pontos
                 }
-
                 if (erros >= errosPermitidos) {
-                    // Se o número de erros atingir o limite
                     mostrarTelaGameOver();
                 }
-                mostrarFeedback("Resposta incorreta!", false); // Exibe feedback de resposta incorreta
+                mostrarFeedback("Resposta incorreta!", false);
             }
 
-            // Registrar a pergunta respondida
             viewModel.registrarPerguntaRespondida(perguntaAtual);
-
-            // Avançar para a próxima pergunta
             viewModel.avancarPergunta();
             exibirPergunta(viewModel.getPerguntaAtual());
 
-            // Atualizar a pontuação e o nível
+            // Atualizar a interface
             atualizarPontuacao();
-            atualizarNivel();
-
-            // Atualizar a barra de progresso
+            atualizarMoedas(); // Atualizar saldo de moedas
             atualizarProgresso();
+            atualizarNivel();
         }
+    }
+
+    private void atualizarMoedas() {
+        binding.tvMoedas.setText("Moedas: " + viewModel.getMoedas());
     }
 
     private void mostrarFeedback(String mensagem, boolean isCorreta) {
