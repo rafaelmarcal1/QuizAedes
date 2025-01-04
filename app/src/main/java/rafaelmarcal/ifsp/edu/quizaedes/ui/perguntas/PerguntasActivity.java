@@ -1,17 +1,13 @@
 package rafaelmarcal.ifsp.edu.quizaedes.ui.perguntas;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
 import rafaelmarcal.ifsp.edu.quizaedes.data.model.Pergunta;
 import rafaelmarcal.ifsp.edu.quizaedes.databinding.ActivityPerguntasBinding;
 import rafaelmarcal.ifsp.edu.quizaedes.ui.gameover.GameOverActivity;
@@ -125,7 +121,7 @@ public class PerguntasActivity extends AppCompatActivity {
             if (respostaSelecionada == posicaoCorreta) {
                 // Resposta correta
                 viewModel.adicionarPontos(10); // Adiciona pontos pela resposta correta
-                viewModel.incrementarNivel(); // Incrementa o nível a cada 2 respostas corretas
+                viewModel.incrementarNivel(); // Incrementa o nível a cada 3 respostas corretas
                 viewModel.verificarVitoria();
                 mostrarFeedback("Resposta correta!", true); // Exibe feedback de resposta correta
             } else {
@@ -153,6 +149,9 @@ public class PerguntasActivity extends AppCompatActivity {
             // Atualizar a pontuação e o nível
             atualizarPontuacao();
             atualizarNivel();
+
+            // Atualizar a barra de progresso
+            atualizarProgresso();
         }
     }
 
@@ -194,5 +193,10 @@ public class PerguntasActivity extends AppCompatActivity {
         intent.putExtra("PONTUACAO", viewModel.getPontuacao());
         startActivity(intent);
         finish();
+    }
+
+    private void atualizarProgresso() {
+        int perguntasRespondidas = viewModel.getPerguntaAtualIndex();  // Número da pergunta atual (0 a 8)
+        binding.progressBar.setProgress(perguntasRespondidas);  // Atualiza o progresso da barra
     }
 }

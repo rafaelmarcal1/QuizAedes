@@ -3,7 +3,6 @@ package rafaelmarcal.ifsp.edu.quizaedes.ui.perguntas;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -40,6 +39,10 @@ public class PerguntasViewModel extends ViewModel {
 
     public int getNumeroPerguntaAtual() {
         return perguntaAtualIndex + 1; // Como o índice começa de 0, somamos 1 para exibir "Pergunta 1", "Pergunta 2", etc.
+    }
+
+    public int getPerguntaAtualIndex() {
+        return perguntaAtualIndex;  // Retorna o índice da pergunta atual (de 0 a 8)
     }
 
     // Avançar para a próxima pergunta
@@ -128,4 +131,5 @@ public class PerguntasViewModel extends ViewModel {
         respostasCorretas = 0;
         nivel = 1; // Resetar o nível
     }
+
 }
