@@ -18,16 +18,86 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Estatísticas -->
+    <!-- Título da seção de estatísticas -->
     <TextView
-        android:id="@+id/tvEstatisticas"
-        android:layout_width="0dp"
+        android:id="@+id/tvEstatisticasTitulo"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nível: 0 | Pontos: 0 | Conquistas: 0"
+        android:text="Estatísticas:"
+        android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/tvNomeUsuario"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp" />
+
+    <!-- Nível -->
+    <TextView
+        android:id="@+id/tvNivel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Maior Nível já alcançado numa partida: 0"
+        app:layout_constraintTop_toBottomOf="@id/tvEstatisticasTitulo"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="8dp" />
+
+    <!-- Pontos -->
+    <TextView
+        android:id="@+id/tvPontos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pontos: 0"
+        app:layout_constraintTop_toBottomOf="@id/tvNivel"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="8dp" />
+
+    <!-- Conquistas -->
+    <TextView
+        android:id="@+id/tvConquistas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Conquistas: 0"
+        app:layout_constraintTop_toBottomOf="@id/tvPontos"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="8dp" />
+
+    <!-- Total de Vitórias -->
+    <TextView
+        android:id="@+id/tvVitorias"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Total de Vitórias: 0"
+        app:layout_constraintTop_toBottomOf="@id/tvConquistas"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="8dp" />
+
+    <!-- Total de Derrotas -->
+    <TextView
+        android:id="@+id/tvDerrotas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Total de Derrotas: 0"
+        app:layout_constraintTop_toBottomOf="@id/tvVitorias"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="8dp" />
+
+    <!-- Melhor Recorde Pessoal -->
+    <TextView
+        android:id="@+id/tvRecordePessoal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Melhor Recorde: 0"
+        app:layout_constraintTop_toBottomOf="@id/tvDerrotas"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="8dp" />
+
+    <!-- Percentual de Vitórias -->
+    <TextView
+        android:id="@+id/tvPercentualVitorias"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Aproveitamento: 0%"
+        app:layout_constraintTop_toBottomOf="@id/tvRecordePessoal"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="8dp" />
 
     <!-- Botão para editar perfil -->
     <Button
@@ -35,7 +105,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/editar_perfil"
-        app:layout_constraintTop_toBottomOf="@id/tvEstatisticas"
+        app:layout_constraintTop_toBottomOf="@id/tvPercentualVitorias"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp" />

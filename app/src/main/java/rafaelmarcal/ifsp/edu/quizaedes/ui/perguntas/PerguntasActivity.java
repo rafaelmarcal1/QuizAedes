@@ -1,5 +1,6 @@
 package rafaelmarcal.ifsp.edu.quizaedes.ui.perguntas;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -149,6 +150,21 @@ public class PerguntasActivity extends AppCompatActivity {
             // Atualizar a pontuação e o nível
             atualizarPontuacao();
             atualizarNivel();
+
+            // Verifica se o novo nível é maior do que o salvo
+            int novoNivel = viewModel.getNivel();  // Obtém o nível atual
+            SharedPreferences sharedPreferences = getSharedPreferences("perfil", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+
+            // Recupera o maior nível salvo
+            int maiorNivel = sharedPreferences.getInt("maior_nivel", 0);
+
+            if (novoNivel > maiorNivel) {
+                editor.putInt("maior_nivel", novoNivel);  // Salva o novo maior nível
+                editor.apply();  // Confirma a alteração
+                // Atualiza o TextView para refletir o novo maior nível
+                binding.tvNivel.setText("Maior Nível já alcançado numa partida: " + novoNivel);
+            }
 
             // Atualizar a barra de progresso
             atualizarProgresso();

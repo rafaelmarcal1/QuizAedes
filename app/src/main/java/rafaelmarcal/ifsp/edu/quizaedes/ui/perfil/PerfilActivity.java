@@ -1,5 +1,6 @@
 package rafaelmarcal.ifsp.edu.quizaedes.ui.perfil;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -13,15 +14,25 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import rafaelmarcal.ifsp.edu.quizaedes.R;
+import rafaelmarcal.ifsp.edu.quizaedes.databinding.ActivityPerguntasBinding;
+
 
 public class PerfilActivity extends AppCompatActivity {
     private TextView tvNomeUsuario;
     private FirebaseAuth mAuth;
+    private ActivityPerguntasBinding binding;  // Objeto de binding para acessar os componentes da UI
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil);
+
+        // Recupera o maior nível já alcançado usando SharedPreferences
+        SharedPreferences sharedPreferences = getSharedPreferences("perfil", MODE_PRIVATE);
+        int maiorNivel = sharedPreferences.getInt("maior_nivel", 0);  // 0 é o valor padrão caso não tenha um valor salvo
+
+        // Exibe o maior nível no TextView usando o binding
+        binding.tvNivel.setText("Maior Nível já alcançado numa partida: " + maiorNivel);
 
         // Inicializar o FirebaseAuth
         mAuth = FirebaseAuth.getInstance();
