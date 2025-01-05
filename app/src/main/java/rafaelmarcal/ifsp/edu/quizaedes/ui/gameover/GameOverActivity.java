@@ -1,6 +1,7 @@
 package rafaelmarcal.ifsp.edu.quizaedes.ui.gameover;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,16 +22,49 @@ public class GameOverActivity extends AppCompatActivity {
         int pontuacao = getIntent().getIntExtra("PONTUACAO", 0);
         int moedas = getIntent().getIntExtra("MOEDAS", 0);  // Recupera as moedas
 
-        // Configurando os textos da tela de game over
-        binding.tvPontuacaoFinal.setText("Pontuação Final: " + pontuacao);
-        binding.tvMoedas.setText("Moedas: " + moedas);  // Atualiza o TextView com as moedas
+        // Recuperando se o jogador venceu ou perdeu
+        boolean venceu = getIntent().getBooleanExtra("VITORIA", false);
 
-        // Configurando o botão para jogar novamente
+        // Atualizando o texto com base na vitória ou derrota
+        if (venceu) {
+            // Mensagem de Vitória
+            binding.tvPontuacaoFinal.setText("Parabéns! Você venceu!");
+            binding.tvPontuacaoFinal.setTextColor(getResources().getColor(android.R.color.holo_green_dark));
+        } else {
+            // Mensagem de Game Over
+            binding.tvPontuacaoFinal.setText("Game Over! Tente novamente!");
+            binding.tvPontuacaoFinal.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
+        }
+
+        // Exibe a pontuação final
+        binding.tvMoedas.setText("Moedas: " + moedas);
+
+        // Exibe a pontuação final
+        binding.tvPontuacao.setText("Pontuação Final: " + pontuacao);
+
+        // Recupera o maior nível alcançado da SharedPreferences
+        SharedPreferences sharedPreferences = getSharedPreferences("game_data", MODE_PRIVATE);
+        int maiorNivel = sharedPreferences.getInt("MAIOR_NIVEL", 1); // 1 é o valor inicial
+
+        // Atualizando o maior nível
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        int pontosTotais = sharedPreferences.getInt("PONTUACAO_TOTAL", 0) + pontuacao;
+        editor.putInt("PONTUACAO_TOTAL", pontosTotais);
+
+        if (maiorNivel < getIntent().getIntExtra("MAIOR_NIVEL", 1)) {
+            maiorNivel = getIntent().getIntExtra("MAIOR_NIVEL", 1);  // Atualiza o maior nível
+        }
+        editor.putInt("MAIOR_NIVEL", maiorNivel);
+
+        int moedasTotais = sharedPreferences.getInt("MOEDAS_TOTAL", 0) + moedas;
+        editor.putInt("MOEDAS_TOTAL", moedasTotais);
+        editor.apply();
+
+        // Botões para reiniciar ou sair
         binding.btnJogarNovamente.setOnClickListener(v -> reiniciarQuiz());
-
-        // Configurando o botão para sair
-        binding.btnSair.setOnClickListener(v -> finish());  // Fecha a atividade
+        binding.btnSair.setOnClickListener(v -> finish());
     }
+
 
     private void reiniciarQuiz() {
         // Reinicia o quiz e retorna para a tela de PerguntasActivity

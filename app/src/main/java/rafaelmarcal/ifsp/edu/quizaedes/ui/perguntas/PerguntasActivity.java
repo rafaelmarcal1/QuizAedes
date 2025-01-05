@@ -53,8 +53,8 @@ public class PerguntasActivity extends AppCompatActivity {
         // Observando o estado de "quiz terminado"
         viewModel.getQuizTerminado().observe(this, quizTerminado -> {
             if (quizTerminado != null && quizTerminado) {
-                // O quiz acabou, redireciona para a tela de vitória
-                mostrarTelaVitoria();
+                // O quiz acabou, redireciona para a tela de Game Over com vitória
+                mostrarTelaGameOver(true); // Agora redirecionamos para GameOver com "VITÓRIA"
             }
         });
 
@@ -78,10 +78,11 @@ public class PerguntasActivity extends AppCompatActivity {
         Toast.makeText(this, mensagem, Toast.LENGTH_SHORT).show();
     }
 
-    private void mostrarTelaVitoria() {
-        Intent intent = new Intent(PerguntasActivity.this, VitoriaActivity.class);
+    private void mostrarTelaGameOver(boolean venceu) {
+        Intent intent = new Intent(PerguntasActivity.this, GameOverActivity.class);
         intent.putExtra("PONTUACAO", viewModel.getPontuacao());
         intent.putExtra("MOEDAS", viewModel.getMoedas());  // Passa as moedas
+        intent.putExtra("VITORIA", venceu);  // Passando um extra indicando se o jogador venceu
         startActivity(intent);
         finish();
     }
@@ -137,7 +138,7 @@ public class PerguntasActivity extends AppCompatActivity {
                     viewModel.adicionarPontos(-5); // Subtrai pontos
                 }
                 if (erros >= errosPermitidos) {
-                    mostrarTelaGameOver();
+                    mostrarTelaGameOver(false);  // Passando "false" para indicar que o jogador perdeu
                 }
                 mostrarFeedback("Resposta incorreta!", false);
             }
@@ -189,14 +190,6 @@ public class PerguntasActivity extends AppCompatActivity {
     private void atualizarNivel() {
         // Atualiza o TextView do nível com o valor atual
         binding.tvNivel.setText("Nível: " + viewModel.getNivel());
-    }
-
-    private void mostrarTelaGameOver() {
-        Intent intent = new Intent(PerguntasActivity.this, GameOverActivity.class);
-        intent.putExtra("PONTUACAO", viewModel.getPontuacao());
-        intent.putExtra("MOEDAS", viewModel.getMoedas());  // Passa as moedas
-        startActivity(intent);
-        finish();
     }
 
     private void atualizarProgresso() {
