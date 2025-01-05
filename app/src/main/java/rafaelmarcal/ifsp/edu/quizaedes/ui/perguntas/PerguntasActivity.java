@@ -81,6 +81,7 @@ public class PerguntasActivity extends AppCompatActivity {
     private void mostrarTelaVitoria() {
         Intent intent = new Intent(PerguntasActivity.this, VitoriaActivity.class);
         intent.putExtra("PONTUACAO", viewModel.getPontuacao());
+        intent.putExtra("MOEDAS", viewModel.getMoedas());  // Passa as moedas
         startActivity(intent);
         finish();
     }
@@ -193,6 +194,7 @@ public class PerguntasActivity extends AppCompatActivity {
     private void mostrarTelaGameOver() {
         Intent intent = new Intent(PerguntasActivity.this, GameOverActivity.class);
         intent.putExtra("PONTUACAO", viewModel.getPontuacao());
+        intent.putExtra("MOEDAS", viewModel.getMoedas());  // Passa as moedas
         startActivity(intent);
         finish();
     }
