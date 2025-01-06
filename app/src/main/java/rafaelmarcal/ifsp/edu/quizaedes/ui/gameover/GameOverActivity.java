@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import rafaelmarcal.ifsp.edu.quizaedes.databinding.ActivityGameOverBinding;
+import rafaelmarcal.ifsp.edu.quizaedes.ui.conquistas.ConquistasActivity;
 import rafaelmarcal.ifsp.edu.quizaedes.ui.perguntas.PerguntasActivity;
 
 public class GameOverActivity extends AppCompatActivity {
@@ -20,7 +21,7 @@ public class GameOverActivity extends AppCompatActivity {
 
         // Recuperando a pontuação e moedas da Intent
         int pontuacao = getIntent().getIntExtra("PONTUACAO", 0);
-        int moedas = getIntent().getIntExtra("MOEDAS", 0);  // Recupera as moedas
+        int moedas = getIntent().getIntExtra("MOEDAS", 0); // Recupera as moedas da partida
 
         // Recuperando se o jogador venceu ou perdeu
         boolean venceu = getIntent().getBooleanExtra("VITORIA", false);
@@ -36,40 +37,49 @@ public class GameOverActivity extends AppCompatActivity {
             binding.tvPontuacaoFinal.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
         }
 
-        // Exibe a pontuação final
+        // Exibe a pontuação e moedas da partida
+        binding.tvPontuacao.setText("Pontuação Final: " + pontuacao);
         binding.tvMoedas.setText("Moedas: " + moedas);
 
-        // Exibe a pontuação final
-        binding.tvPontuacao.setText("Pontuação Final: " + pontuacao);
-
-        // Recupera o maior nível alcançado da SharedPreferences
-        SharedPreferences sharedPreferences = getSharedPreferences("game_data", MODE_PRIVATE);
-        int maiorNivel = sharedPreferences.getInt("MAIOR_NIVEL", 1); // 1 é o valor inicial
-
-        // Atualizando o maior nível
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        int pontosTotais = sharedPreferences.getInt("PONTUACAO_TOTAL", 0) + pontuacao;
-        editor.putInt("PONTUACAO_TOTAL", pontosTotais);
-
-        if (maiorNivel < getIntent().getIntExtra("MAIOR_NIVEL", 1)) {
-            maiorNivel = getIntent().getIntExtra("MAIOR_NIVEL", 1);  // Atualiza o maior nível
-        }
-        editor.putInt("MAIOR_NIVEL", maiorNivel);
-
-        int moedasTotais = sharedPreferences.getInt("MOEDAS_TOTAL", 0) + moedas;
-        editor.putInt("MOEDAS_TOTAL", moedasTotais);
-        editor.apply();
+        // Atualizando os dados no SharedPreferences
+        atualizarDados(pontuacao, moedas);
 
         // Botões para reiniciar ou sair
         binding.btnJogarNovamente.setOnClickListener(v -> reiniciarQuiz());
         binding.btnSair.setOnClickListener(v -> finish());
+        binding.btnVerConquistas.setOnClickListener(v -> abrirConquistas());
     }
 
+    private void atualizarDados(int pontuacao, int moedas) {
+        SharedPreferences sharedPreferences = getSharedPreferences("game_data", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        // Atualiza o maior nível alcançado
+        int maiorNivel = sharedPreferences.getInt("MAIOR_NIVEL", 1);
+        if (maiorNivel < getIntent().getIntExtra("MAIOR_NIVEL", 1)) {
+            maiorNivel = getIntent().getIntExtra("MAIOR_NIVEL", 1);
+        }
+        editor.putInt("MAIOR_NIVEL", maiorNivel);
+
+        // Atualiza a pontuação total
+        int pontosTotais = sharedPreferences.getInt("PONTUACAO_TOTAL", 0) + pontuacao;
+        editor.putInt("PONTUACAO_TOTAL", pontosTotais);
+
+        // Atualiza as moedas totais
+        int moedasTotais = sharedPreferences.getInt("MOEDAS_TOTAL", 0) + moedas;
+        editor.putInt("MOEDAS_TOTAL", moedasTotais);
+
+        editor.apply();
+    }
 
     private void reiniciarQuiz() {
-        // Reinicia o quiz e retorna para a tela de PerguntasActivity
         Intent intent = new Intent(GameOverActivity.this, PerguntasActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    private void abrirConquistas() {
+        Intent intent = new Intent(GameOverActivity.this, ConquistasActivity.class);
+        startActivity(intent);
     }
 }

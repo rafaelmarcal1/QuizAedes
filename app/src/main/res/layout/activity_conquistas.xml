@@ -1,21 +1,162 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    tools:context=".ui.conquistas.ConquistasActivity">
+    android:padding="16dp">
+
+    <!-- Descrição no topo -->
+    <TextView
+        android:id="@+id/tvDescricaoConquistas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tela de Conquistas"
+        android:textSize="20sp"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="8dp"/>
+
+    <!-- Subtítulo abaixo da descrição -->
+    <TextView
+        android:id="@+id/tvSubDescricao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Veja suas conquistas desbloqueadas e compre itens!"
+        android:textSize="16sp"
+        android:textColor="@android:color/darker_gray"
+        android:layout_below="@id/tvDescricaoConquistas"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Título da seção de conquistas -->
+    <TextView
+        android:id="@+id/tvTituloConquistas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Conquistas"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:layout_below="@id/tvSubDescricao"
+        android:layout_marginBottom="8dp"/>
 
     <!-- Lista de conquistas -->
-    <ListView
-        android:id="@+id/listConquistas"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvConquistas"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_below="@id/tvTituloConquistas"
+        android:layout_marginBottom="16dp"
+        android:scrollbars="vertical"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- Título da seção de itens de mercado -->
+    <TextView
+        android:id="@+id/tvTituloMercado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Itens do Mercado"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:layout_below="@id/rvConquistas"
+        android:layout_marginBottom="8dp"/>
+
+    <!-- Lista de itens do mercado -->
+    <ScrollView
+        android:id="@+id/scrollViewMarket"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_below="@id/tvTituloMercado"
+        android:layout_above="@id/moedasContainer"
+        android:padding="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Item do mercado: Larvicida Virtual -->
+            <LinearLayout
+                android:id="@+id/marketItemLarvicida"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp"
+                android:background="@android:color/white"
+                android:layout_marginBottom="8dp">
+
+                <!-- Imagem do item -->
+                <ImageView
+                    android:id="@+id/ivLarvicida"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:src="@drawable/spray"
+                    android:layout_marginEnd="16dp"/>
+
+                <!-- Informações do item -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvTituloLarvicida"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Larvicida Virtual"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/black"/>
+
+                    <TextView
+                        android:id="@+id/tvPrecoLarvicida"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Preço: 200 moedas"
+                        android:textSize="14sp"
+                        android:textColor="@android:color/darker_gray"/>
+                </LinearLayout>
+
+                <!-- Botão de compra -->
+                <Button
+                    android:id="@+id/btnComprarLarvicida"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Comprar"
+                    android:enabled="true"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Seção de moedas -->
+    <LinearLayout
+        android:id="@+id/moedasContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_alignParentBottom="true"
+        android:padding="8dp">
+
+        <!-- Ícone de moeda -->
+        <ImageView
+            android:id="@+id/ivMoedaIcone"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/coin"
+            android:layout_marginEnd="8dp"/>
+
+        <!-- Total de moedas -->
+        <TextView
+            android:id="@+id/tvTotalMoedas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textSize="18sp"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"/>
+    </LinearLayout>
+</RelativeLayout>
